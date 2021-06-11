@@ -1,0 +1,69 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("f623d49a-9ebf-4164-83d5-cf30c59bf2e4",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'transform',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("c0742b08-a82c-4ab0-a150-57c3cd25cddb",
+	112,
+	"f623d49a-9ebf-4164-83d5-cf30c59bf2e4",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'',
+	'mcada::mcada::mcada::transform');
+INSERT INTO DIM_DIA
+	VALUES ("c0742b08-a82c-4ab0-a150-57c3cd25cddb",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO EP_PKGREF
+	VALUES ("f623d49a-9ebf-4164-83d5-cf30c59bf2e4",
+	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2");
+INSERT INTO EP_PKG_PROXY
+	VALUES ("195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'transform',
+	'',
+	0,
+	'../../../transform/transform.xtuml');
+INSERT INTO PE_PE
+	VALUES ("f623d49a-9ebf-4164-83d5-cf30c59bf2e4",
+	1,
+	"00000000-0000-0000-0000-000000000000",
+	"84d4763a-d0d5-40b9-874c-48d375286cff",
+	7);
+INSERT INTO C_C_PROXY
+	VALUES ("84d4763a-d0d5-40b9-874c-48d375286cff",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'mcada',
+	'',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'',
+	'../mcada.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'mcada',
+	1,
+	'../../../mcada.xtuml');

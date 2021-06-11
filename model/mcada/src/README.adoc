@@ -1,3 +1,3 @@
 = src
 
-Generated java ends up here.
+Hand-craft source java goes here.

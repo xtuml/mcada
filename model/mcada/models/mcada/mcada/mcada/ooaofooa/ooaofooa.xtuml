@@ -1,0 +1,72 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("2b041886-d625-4b7d-a874-4d5f6cfddfe3",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'ooaofooa',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("8155369e-8226-4dec-9b80-77aadcf36a84",
+	112,
+	"2b041886-d625-4b7d-a874-4d5f6cfddfe3",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'',
+	'mcada::mcada::mcada::ooaofooa');
+INSERT INTO DIM_DIA
+	VALUES ("8155369e-8226-4dec-9b80-77aadcf36a84",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO EP_PKGREF
+	VALUES ("2b041886-d625-4b7d-a874-4d5f6cfddfe3",
+	"53c53174-40a3-4d71-a2d9-4d8fbbf1e693");
+INSERT INTO EP_PKG_PROXY
+	VALUES ("53c53174-40a3-4d71-a2d9-4d8fbbf1e693",
+	"00c718a4-fada-4398-be36-d920a6735b6a",
+	"00c718a4-fada-4398-be36-d920a6735b6a",
+	'ooaofooa',
+	'
+
+
+',
+	0,
+	'../../../../../../mcooa/models/mcooa/ooaofooa/ooaofooa.xtuml');
+INSERT INTO PE_PE
+	VALUES ("2b041886-d625-4b7d-a874-4d5f6cfddfe3",
+	1,
+	"00000000-0000-0000-0000-000000000000",
+	"84d4763a-d0d5-40b9-874c-48d375286cff",
+	7);
+INSERT INTO C_C_PROXY
+	VALUES ("84d4763a-d0d5-40b9-874c-48d375286cff",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'mcada',
+	'',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'',
+	'../mcada.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'mcada',
+	1,
+	'../../../mcada.xtuml');

@@ -18,7 +18,7 @@ cd $WORKSPACE/mcooa && unzip -q $HOME/.m2/repository/org/xtuml/mcooa/$MCOOA_VERS
 cd $WORKSPACE/org.xtuml.bp.ui.marking && unzip -q $HOME/.m2/repository/org/xtuml/bp/org.xtuml.bp.ui.marking/$MARKING_VERSION/org.xtuml.bp.ui.marking-$MARKING_VERSION.jar
 cd $OLD_PWD
 $BPHOME/bridgepoint -nosplash -data $WORKSPACE -application org.eclipse.cdt.managedbuilder.core.headlessbuild -importAll $WORKSPACE
-#$BPHOME/bridgepoint -nosplash -data $WORKSPACE -application org.eclipse.cdt.managedbuilder.core.headlessbuild -importAll $PWD/model/mcboj
+#$BPHOME/bridgepoint -nosplash -data $WORKSPACE -application org.eclipse.cdt.managedbuilder.core.headlessbuild -importAll $PWD/model/mcada
 chmod -R -w $WORKSPACE/io.ciera.runtime $WORKSPACE/mcooa $WORKSPACE/org.xtuml.bp.ui.marking
 echo "Workspace set up: $WORKSPACE"
 exit 0

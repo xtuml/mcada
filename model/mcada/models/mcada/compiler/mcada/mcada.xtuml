@@ -1,0 +1,158 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	'mcada',
+	1,
+	'mcada',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("223cdb52-5571-4b93-a6e7-594f8c7e40c2",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	'getDefaultInstance',
+	'',
+	"75d17b6a-34f3-4150-90e5-6957cf5d392c",
+	0,
+	'select any mcada from instances of mcada where (selected.name == "default");
+if ( empty mcada )
+  create object instance mcada of mcada;
+  mcada.name = "default";
+  mcada.projectroot = "";
+end if;
+return mcada;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO S_DT_PROXY
+	VALUES ("75d17b6a-34f3-4150-90e5-6957cf5d392c",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<mcada>',
+	'',
+	'',
+	'../compiler.xtuml');
+INSERT INTO O_TFR
+	VALUES ("dbfc63c7-5345-4a6f-95f9-c5e2744a614b",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	'setprojectroot',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'mcada = mcada::getDefaultInstance();
+mcada.projectroot = param.value;',
+	1,
+	'',
+	"223cdb52-5571-4b93-a6e7-594f8c7e40c2",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("4e15aa2b-638d-4870-b193-f5ee8fadb3bd",
+	"dbfc63c7-5345-4a6f-95f9-c5e2744a614b",
+	'value',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("5fa2e50d-3eb6-44ab-9ebb-6f58f7f084bf",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	'setversion',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'mcada = mcada::getDefaultInstance();
+mcada.version = param.value;',
+	1,
+	'',
+	"dbfc63c7-5345-4a6f-95f9-c5e2744a614b",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("4f94b03b-0187-4e83-84e8-82a7d77f66d4",
+	"5fa2e50d-3eb6-44ab-9ebb-6f58f7f084bf",
+	'value',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("515a6959-25a3-4c7a-8015-1333132b6834",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_BATTR
+	VALUES ("515a6959-25a3-4c7a-8015-1333132b6834",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_ATTR
+	VALUES ("515a6959-25a3-4c7a-8015-1333132b6834",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("54e74871-3e89-42f6-bcee-cc6f018b9ba0",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_BATTR
+	VALUES ("54e74871-3e89-42f6-bcee-cc6f018b9ba0",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_ATTR
+	VALUES ("54e74871-3e89-42f6-bcee-cc6f018b9ba0",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	"515a6959-25a3-4c7a-8015-1333132b6834",
+	'projectroot',
+	'',
+	'',
+	'projectroot',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("579dc0cc-fa85-4883-a0cf-96d289af8c4a",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_BATTR
+	VALUES ("579dc0cc-fa85-4883-a0cf-96d289af8c4a",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_ATTR
+	VALUES ("579dc0cc-fa85-4883-a0cf-96d289af8c4a",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	"54e74871-3e89-42f6-bcee-cc6f018b9ba0",
+	'version',
+	'',
+	'',
+	'version',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_ID
+	VALUES (1,
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO O_ID
+	VALUES (2,
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
+INSERT INTO PE_PE
+	VALUES ("5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	1,
+	"c17bd693-bb6b-4701-8f3d-f5e4d1fe0ede",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c17bd693-bb6b-4701-8f3d-f5e4d1fe0ede",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'compiler',
+	'',
+	0,
+	'../compiler.xtuml');
