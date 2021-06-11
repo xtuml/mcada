@@ -1,2 +1,0 @@
-# mcada
-Ada Model Compiler

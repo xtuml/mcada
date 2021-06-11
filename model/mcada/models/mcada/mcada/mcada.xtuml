@@ -1,0 +1,46 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("0e528ae2-b457-4dcc-916b-a5a95949dac1",
+	"5a185377-14b3-4073-815d-09f5c1737e51",
+	"5a185377-14b3-4073-815d-09f5c1737e51",
+	'mcada',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("e9f357b0-445b-49fc-8526-fa92bce0dd39",
+	112,
+	"0e528ae2-b457-4dcc-916b-a5a95949dac1",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'',
+	'mcada::mcada');
+INSERT INTO DIM_DIA
+	VALUES ("e9f357b0-445b-49fc-8526-fa92bce0dd39",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO PE_PE
+	VALUES ("0e528ae2-b457-4dcc-916b-a5a95949dac1",
+	1,
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	7);
+INSERT INTO S_SYS_PROXY
+	VALUES ("5a185377-14b3-4073-815d-09f5c1737e51",
+	'mcada',
+	1,
+	'../mcada.xtuml');

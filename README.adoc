@@ -1,0 +1,62 @@
+= mcada
+Ada Model Compiler
+
+== System Requirements
+
+* Python
+* pyxtuml (>= v2.2.0): https://pypi.org/project/pyxtuml/
+* Maven: https://maven.apache.org/ (On macos, Xcode is a prerequisite.)
+* GNAT: https://www.adacore.com/community
+* BridgePoint (nightly build): https://xtuml.org/download/
+
+== Building MC-Ada
+
+1. Navigate to the source project directory
++
+----
+cd model/mcada
+----
+2. Install the project with maven
++
+----
+mvn install
+----
+
+== Building/running the example
+
+1. Launch BridgePoint. In a new workspace, import the MicrowaveOven model from
+   the welcome page.
+2. Load and persist the model.
+   * __This is required so the model data matches the latest schema for the
+     pyxtuml prebuild.__
+3. Navigate to the example directory
++
+----
+cd example
+----
+4. Build the project.
++
+----
+./build.sh <path_to_MicrowaveOven_project>
+----
+5. Run the project
++
+----
+./bin/defineoven
+----
+
+== Preparing a Development Workspace
+
+A convenience script has been included to prepare a workspace for development
+with the required projects.
+
+Be sure environment variable BPHOME is set to point to your BridgePoint
+installation... e.g. /Users/you/xtuml/BridgePoint.
+
+----
+./create-workspace.sh <desired_workspace_location>
+----
+
+NOTE:  The script marks the referred to projects as __read only__. This is
+       intentional as they are meant as library projects only. Edits to them will have
+       to be committed to their upstream repositories if they really need to change**
