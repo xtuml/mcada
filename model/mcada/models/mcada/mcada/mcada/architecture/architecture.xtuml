@@ -1,0 +1,69 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("1c0a87b9-9af1-4d23-810a-62c02daf0ff1",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'architecture',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("84361120-4522-44e1-93a1-f661350b1a9c",
+	112,
+	"1c0a87b9-9af1-4d23-810a-62c02daf0ff1",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'',
+	'mcada::mcada::mcada::architecture');
+INSERT INTO DIM_DIA
+	VALUES ("84361120-4522-44e1-93a1-f661350b1a9c",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO EP_PKGREF
+	VALUES ("1c0a87b9-9af1-4d23-810a-62c02daf0ff1",
+	"20a1bdfd-bbae-4206-be15-4d69042aa38c");
+INSERT INTO EP_PKG_PROXY
+	VALUES ("20a1bdfd-bbae-4206-be15-4d69042aa38c",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'architecture',
+	'',
+	0,
+	'../../../architecture/architecture.xtuml');
+INSERT INTO PE_PE
+	VALUES ("1c0a87b9-9af1-4d23-810a-62c02daf0ff1",
+	1,
+	"00000000-0000-0000-0000-000000000000",
+	"84d4763a-d0d5-40b9-874c-48d375286cff",
+	7);
+INSERT INTO C_C_PROXY
+	VALUES ("84d4763a-d0d5-40b9-874c-48d375286cff",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'mcada',
+	'',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'',
+	'../mcada.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'mcada',
+	1,
+	'../../../mcada.xtuml');

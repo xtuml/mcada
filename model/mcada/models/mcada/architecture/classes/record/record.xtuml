@@ -1,0 +1,70 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("5001893f-5066-4ee3-b0a1-d78e8a59c1ee",
+	'record',
+	100,
+	'record',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("a2640ad8-68ef-4058-b9e7-e4a4f086c536",
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'T::push_buffer();
+select many fields related by self->field[R2];
+for each field in fields
+  field.render();
+end for;
+field_body = T::body();
+T::pop_buffer();
+T::include(file:"package/t.record.ada");',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	1);
+INSERT INTO O_NBATTR
+	VALUES ("60f4b065-7340-4e3f-b8bb-3a7a85bfae21",
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee");
+INSERT INTO O_BATTR
+	VALUES ("60f4b065-7340-4e3f-b8bb-3a7a85bfae21",
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee");
+INSERT INTO O_ATTR
+	VALUES ("60f4b065-7340-4e3f-b8bb-3a7a85bfae21",
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee");
+INSERT INTO O_ID
+	VALUES (1,
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee");
+INSERT INTO O_ID
+	VALUES (2,
+	"5001893f-5066-4ee3-b0a1-d78e8a59c1ee");
+INSERT INTO PE_PE
+	VALUES ("5001893f-5066-4ee3-b0a1-d78e8a59c1ee",
+	1,
+	"48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'classes',
+	'',
+	0,
+	'../classes.xtuml');
