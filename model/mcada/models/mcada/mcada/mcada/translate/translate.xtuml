@@ -169,9 +169,7 @@ LOG::LogTime(message:"  Elapsed time:", t:TIM::current_clock() - start_time);
 LOG::LogInfo(message:"  Rendering application...");
 select many genfiles from instances of genfile;
 for each genfile in genfiles
-  /* CDS
   genfile.render();
-  */
 end for;
 LOG::LogInfo(message:"  done.");
 LOG::LogTime(message:"  Elapsed time:", t:TIM::current_clock() - start_time);

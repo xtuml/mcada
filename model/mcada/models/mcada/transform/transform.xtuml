@@ -74,19 +74,20 @@ INSERT INTO S_SYNC
 	'transformAttribute',
 	'',
 	'o_attr = param.o_attr;
-cls = param.cls;
+record = param.record;
 
-/* CDS
 // create attribute
-create object instance attr of Attribute;
-attr.name = o_attr.Name;
-relate attr to cls across R3900;
+create object instance field of field;
+field.name = o_attr.Name;
+relate field to record across R2;
 
 // link type
 select one s_dt related by o_attr->S_DT[R114];
-if (s_dt.Name == "same_as<Base_Attribute>")
+if ( s_dt.Name == "same_as<Base_Attribute>" )
   select one s_dt related by o_attr->O_RATTR[R106]->O_BATTR[R113]->O_ATTR[R106]->S_DT[R114];
 end if;
+
+/* CDS
 select any type from instances of Type where (selected.xtuml_type_name == s_dt.Name);
 create object instance type_ref of TypeReference;
 if (empty type)
@@ -121,12 +122,19 @@ INSERT INTO S_DT_PROXY
 INSERT INTO S_SPARM
 	VALUES ("22ffd5c7-45b8-4778-b91a-438d77b4b73d",
 	"044dfd91-f990-49d8-b9d3-f7cab2bd02a4",
-	'cls',
-	"ba5eda7a-def5-0000-0000-000000000002",
+	'record',
+	"b2691aea-c079-4609-863d-c1ed62e47655",
 	0,
 	'',
 	"7bb720bc-3c33-43ad-b9fd-57c66138c62c",
 	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("b2691aea-c079-4609-863d-c1ed62e47655",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<record>',
+	'',
+	'',
+	'../architecture/classes/classes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("044dfd91-f990-49d8-b9d3-f7cab2bd02a4",
 	1,
@@ -221,20 +229,18 @@ INSERT INTO S_SYNC
 	'transformModelClass',
 	'',
 	'o_obj = param.o_obj;
-pkg = param.pkg;
+adapackage = param.adapackage;
 
-/* CDS
 // create class
-create object instance cls of Cls;
-cls.name = o_obj.Key_Lett;
-relate cls to pkg across R3902;
+create object instance record of record;
+record.name = o_obj.Key_Lett;
+relate record to adapackage across R1;
 
 // transform attributes
 select many o_attrs related by o_obj->O_ATTR[R102];
 for each o_attr in o_attrs
-  ::transformAttribute(o_attr:o_attr, cls:cls);
-end for;
-*/',
+  ::transformAttribute(o_attr:o_attr, record:record);
+end for;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -259,12 +265,19 @@ INSERT INTO S_DT_PROXY
 INSERT INTO S_SPARM
 	VALUES ("cb425bce-6256-4b94-a761-8c3f72bfccf7",
 	"d40007e2-7750-4580-933b-eb2c480c2dc6",
-	'pkg',
-	"ba5eda7a-def5-0000-0000-000000000002",
+	'adapackage',
+	"488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
 	0,
 	'',
 	"6f6defcf-633e-431e-b072-35db54bc0f3f",
 	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<adapackage>',
+	'',
+	'',
+	'../architecture/classes/classes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("d40007e2-7750-4580-933b-eb2c480c2dc6",
 	1,
@@ -279,23 +292,21 @@ INSERT INTO S_SYNC
 	'ep_pkg = param.ep_pkg;
 
 // create package
-/* CDS
-create object instance file of File;
-file.name = T::sub(format:"lr", s:ep_pkg.Name);
-file.base_dir = "";
-file.extension = "ads";
-file.full_path = File::get_full_path(base_dir:file.base_dir, name:file.name, extension:file.extension);
-create object instance pkg of Pkg;
-pkg.name = T::sub(format:"r", s:ep_pkg.Name);
-pkg.description = ep_pkg.Descrip;
-relate pkg to file across R3950;
+create object instance genfile of genfile;
+genfile.name = T::sub(format:"lr", s:ep_pkg.Name);
+genfile.base_dir = "";
+genfile.extension = "ads";
+genfile.file_path = genfile::get_full_path(base_dir:genfile.base_dir, name:genfile.name, extension:genfile.extension);
+create object instance adapackage of adapackage;
+adapackage.name = T::sub(format:"r", s:ep_pkg.Name);
+adapackage.description = ep_pkg.Descrip;
+relate adapackage to genfile across R200;
 
 // transform classes
 select many o_objs related by ep_pkg->PE_PE[R8000]->O_OBJ[R8001];
 for each o_obj in o_objs
-  ::transformModelClass(o_obj:o_obj, pkg:pkg);
+  ::transformModelClass(o_obj:o_obj, adapackage:adapackage);
 end for;
-*/
 
 // transform components
 select many c_cs related by ep_pkg->PE_PE[R8000]->C_C[R8001];

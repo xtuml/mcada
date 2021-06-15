@@ -7,6 +7,69 @@ INSERT INTO O_OBJ
 	'genfile',
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("eb964509-738e-4d91-8697-686b6e3672c6",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one adapackage related by self->adapackage[R200];
+if ( not_empty adapackage )
+  adapackage.render();
+end if;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("6c6754eb-ec83-4c54-84ef-627fe7489227",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'get_full_path',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'path = param.name;
+if ("" != param.base_dir)
+  path = param.base_dir + "/" + path;
+end if;
+if ("" != param.extension)
+  path = path + "." + param.extension;
+end if;
+return path;',
+	1,
+	'',
+	"eb964509-738e-4d91-8697-686b6e3672c6",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("aaa17c02-cbf7-41e6-ba68-87c56866c64b",
+	"6c6754eb-ec83-4c54-84ef-627fe7489227",
+	'base_dir',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("84af227c-49a3-404a-8511-c31854d5674d",
+	"6c6754eb-ec83-4c54-84ef-627fe7489227",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"aaa17c02-cbf7-41e6-ba68-87c56866c64b",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("5ecb34ed-3cf6-4648-854d-0c11223376fe",
+	"6c6754eb-ec83-4c54-84ef-627fe7489227",
+	'extension',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"84af227c-49a3-404a-8511-c31854d5674d",
+	'');
 INSERT INTO O_NBATTR
 	VALUES ("fd739cce-4b99-4091-bcb5-84aa143c0147",
 	"96310937-5d19-4102-a55d-f59311314289");
@@ -16,7 +79,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("fd739cce-4b99-4091-bcb5-84aa143c0147",
 	"96310937-5d19-4102-a55d-f59311314289",
-	"00000000-0000-0000-0000-000000000000",
+	"4f236406-a6c2-420d-98a9-e76401875253",
 	'name',
 	'',
 	'',
@@ -25,9 +88,68 @@ INSERT INTO O_ATTR
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
+INSERT INTO O_NBATTR
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_BATTR
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_ATTR
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	"00000000-0000-0000-0000-000000000000",
+	'file_path',
+	'',
+	'',
+	'file_path',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("3a66eddc-1845-4d29-a4f1-e4196bf728be",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_BATTR
+	VALUES ("3a66eddc-1845-4d29-a4f1-e4196bf728be",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_ATTR
+	VALUES ("3a66eddc-1845-4d29-a4f1-e4196bf728be",
+	"96310937-5d19-4102-a55d-f59311314289",
+	"fd739cce-4b99-4091-bcb5-84aa143c0147",
+	'base_dir',
+	'',
+	'',
+	'base_dir',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("6477ba2e-b299-481c-a94d-21f1c2336624",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_BATTR
+	VALUES ("6477ba2e-b299-481c-a94d-21f1c2336624",
+	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_ATTR
+	VALUES ("6477ba2e-b299-481c-a94d-21f1c2336624",
+	"96310937-5d19-4102-a55d-f59311314289",
+	"3a66eddc-1845-4d29-a4f1-e4196bf728be",
+	'extension',
+	'',
+	'',
+	'extension',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
 INSERT INTO O_ID
 	VALUES (0,
 	"96310937-5d19-4102-a55d-f59311314289");
+INSERT INTO O_OIDA
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	'file_path');
 INSERT INTO O_ID
 	VALUES (1,
 	"96310937-5d19-4102-a55d-f59311314289");

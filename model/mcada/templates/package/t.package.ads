@@ -3,5 +3,5 @@
 
 package ${self.name} is
 
-${classes}
+${record_body}
 end ${self.name};
