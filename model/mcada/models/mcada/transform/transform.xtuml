@@ -229,14 +229,14 @@ INSERT INTO S_SYNC
 	'transformModelClass',
 	'',
 	'o_obj = param.o_obj;
-adapackage = param.adapackage;
+class_package = param.class_package;
 
-// create class
+// class becomes record
 create object instance record of record;
 record.name = o_obj.Key_Lett;
-relate record to adapackage across R1;
+relate record to class_package across R1;
 
-// transform attributes
+// attributes become fields
 select many o_attrs related by o_obj->O_ATTR[R102];
 for each o_attr in o_attrs
   ::transformAttribute(o_attr:o_attr, record:record);
@@ -265,7 +265,7 @@ INSERT INTO S_DT_PROXY
 INSERT INTO S_SPARM
 	VALUES ("cb425bce-6256-4b94-a761-8c3f72bfccf7",
 	"d40007e2-7750-4580-933b-eb2c480c2dc6",
-	'adapackage',
+	'class_package',
 	"488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
 	0,
 	'',
@@ -274,7 +274,7 @@ INSERT INTO S_SPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<adapackage>',
+	'inst_ref<class_package>',
 	'',
 	'',
 	'../architecture/classes/classes.xtuml');
@@ -297,15 +297,15 @@ genfile.name = T::sub(format:"lr", s:ep_pkg.Name);
 genfile.base_dir = "";
 genfile.extension = "ads";
 genfile.file_path = genfile::get_full_path(base_dir:genfile.base_dir, name:genfile.name, extension:genfile.extension);
-create object instance adapackage of adapackage;
-adapackage.name = T::sub(format:"r", s:ep_pkg.Name);
-adapackage.description = ep_pkg.Descrip;
-relate adapackage to genfile across R200;
+create object instance class_package of class_package;
+class_package.name = T::sub(format:"r", s:ep_pkg.Name);
+class_package.description = ep_pkg.Descrip;
+relate class_package to genfile across R200;
 
 // transform classes
 select many o_objs related by ep_pkg->PE_PE[R8000]->O_OBJ[R8001];
 for each o_obj in o_objs
-  ::transformModelClass(o_obj:o_obj, adapackage:adapackage);
+  ::transformModelClass(o_obj:o_obj, class_package:class_package);
 end for;
 
 // transform components

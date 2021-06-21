@@ -2,9 +2,9 @@
 
 INSERT INTO O_OBJ
 	VALUES ("8a0521ed-c9f9-45d3-9731-6feddbd586fc",
-	'adapackage',
+	'class_package',
 	102,
-	'adapackage',
+	'class_package',
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
