@@ -38,9 +38,13 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'transformApplication',
 	'',
-	'root_package = param.root_package;
+	'root_ep_pkg = param.root_ep_pkg;
 
-::transformPackage(ep_pkg: root_package);',
+genfile = genfile::populate( name:"root_object", extension:"ads" );
+root_package = root_package::populate();
+relate root_package to genfile across R200;
+
+::transformPackage( ep_pkg:root_ep_pkg );',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -49,7 +53,7 @@ INSERT INTO S_SYNC
 INSERT INTO S_SPARM
 	VALUES ("080b6a4a-c644-473a-b5cb-4e6f60ee6505",
 	"23554559-8c4c-4530-80f1-f4afc6659ee1",
-	'root_package',
+	'root_ep_pkg',
 	"9939c670-a721-4742-a824-ed4b0df4acd6",
 	0,
 	'',
@@ -291,15 +295,14 @@ INSERT INTO S_SYNC
 	'',
 	'ep_pkg = param.ep_pkg;
 
-// create package
-create object instance genfile of genfile;
-genfile.name = T::sub(format:"lr", s:ep_pkg.Name);
-genfile.base_dir = "";
-genfile.extension = "ads";
-genfile.file_path = genfile::get_full_path(base_dir:genfile.base_dir, name:genfile.name, extension:genfile.extension);
-create object instance class_package of class_package;
-class_package.name = T::sub(format:"r", s:ep_pkg.Name);
-class_package.description = ep_pkg.Descrip;
+// create genfile and domain package
+genfile = genfile::populate( name:ep_pkg.Name, extension:"ads" );
+domain_package = domain_package::populate( name:ep_pkg.Name, description:ep_pkg.Descrip );
+relate domain_package to genfile across R200;
+
+// create genfile and class package
+genfile = genfile::populate( name:ep_pkg.Name, extension:"ads" );
+class_package = class_package::populate( name:ep_pkg.Name, description:ep_pkg.Descrip );
 relate class_package to genfile across R200;
 
 // transform classes

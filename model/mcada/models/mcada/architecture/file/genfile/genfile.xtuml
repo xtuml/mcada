@@ -70,6 +70,50 @@ INSERT INTO O_TPARM
 	'',
 	"84af227c-49a3-404a-8511-c31854d5674d",
 	'');
+INSERT INTO O_TFR
+	VALUES ("3d90c842-7b75-432e-a873-aa742bcf43cb",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'populate',
+	'',
+	"0899f83a-df5a-4bc6-9d2b-23838bfa44bf",
+	0,
+	'create object instance genfile of genfile;
+genfile.name = T::sub(format:"lr", s:param.name);
+genfile.base_dir = "";
+genfile.extension = param.extension;
+genfile.file_path = genfile::get_full_path(base_dir:genfile.base_dir, name:genfile.name, extension:genfile.extension);
+
+return genfile;',
+	1,
+	'',
+	"6c6754eb-ec83-4c54-84ef-627fe7489227",
+	0,
+	1);
+INSERT INTO O_TPARM
+	VALUES ("174b106f-abb0-41fc-b46b-366224723a23",
+	"3d90c842-7b75-432e-a873-aa742bcf43cb",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("afcdd09f-ae37-481a-ad3f-da86dd8b46d8",
+	"3d90c842-7b75-432e-a873-aa742bcf43cb",
+	'extension',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"174b106f-abb0-41fc-b46b-366224723a23",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("0899f83a-df5a-4bc6-9d2b-23838bfa44bf",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<genfile>',
+	'',
+	'',
+	'../file.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("fd739cce-4b99-4091-bcb5-84aa143c0147",
 	"96310937-5d19-4102-a55d-f59311314289");

@@ -1,0 +1,145 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	'domain_package',
+	104,
+	'domain_package',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("701c37f6-13ee-4497-9b20-a99dcbefca43",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	'populate',
+	'',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
+	0,
+	'create object instance domain_package of domain_package;
+return domain_package;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	1);
+INSERT INTO O_TPARM
+	VALUES ("dba69e4b-120d-4e98-ac8e-4dbe36172072",
+	"701c37f6-13ee-4497-9b20-a99dcbefca43",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("3d9c56a4-8981-4bda-9d0e-fac746f8221c",
+	"701c37f6-13ee-4497-9b20-a99dcbefca43",
+	'description',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"dba69e4b-120d-4e98-ac8e-4dbe36172072",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("73535d6a-209c-42ca-8802-bd03f5981206",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<domain_package>',
+	'',
+	'',
+	'../classes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_BATTR
+	VALUES ("a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_ATTR
+	VALUES ("a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_REF
+	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"4780cf4d-2dce-4d0e-8090-94ce72858891",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	"df2f0e7d-4b6b-40cf-a97e-37362a6c4cb5",
+	"1196f6f9-1d2d-468b-aa42-d6363f7c052c",
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'genfile',
+	'file_path',
+	'R200');
+INSERT INTO R_RGO_PROXY
+	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"4780cf4d-2dce-4d0e-8090-94ce72858891",
+	'../../file/file.xtuml');
+INSERT INTO O_RTIDA_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	'../../file/file.xtuml');
+INSERT INTO O_RATTR
+	VALUES ("df2f0e7d-4b6b-40cf-a97e-37362a6c4cb5",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	1,
+	'file_path');
+INSERT INTO O_BATTR_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'../../file/genfile/genfile.xtuml');
+INSERT INTO O_ATTR
+	VALUES ("df2f0e7d-4b6b-40cf-a97e-37362a6c4cb5",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	'file_path',
+	'',
+	'',
+	'file_path',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_OIDA
+	VALUES ("df2f0e7d-4b6b-40cf-a97e-37362a6c4cb5",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	0,
+	'file_path');
+INSERT INTO O_ID
+	VALUES (1,
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_ID
+	VALUES (2,
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO PE_PE
+	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	1,
+	"48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'classes',
+	'',
+	0,
+	'../classes.xtuml');

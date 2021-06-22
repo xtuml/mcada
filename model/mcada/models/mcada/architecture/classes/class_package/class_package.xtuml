@@ -32,6 +32,47 @@ end if;',
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	1);
+INSERT INTO O_TFR
+	VALUES ("96887cfa-084f-45c3-b6c0-8fc29adfd456",
+	"8a0521ed-c9f9-45d3-9731-6feddbd586fc",
+	'populate',
+	'',
+	"488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
+	0,
+	'create object instance class_package of class_package;
+class_package.name = T::sub( format:"r", s:param.name );
+class_package.description = param.description;
+return class_package;',
+	1,
+	'',
+	"ccc635be-f10c-4ee5-9df2-ea7b2ce27e93",
+	0,
+	2);
+INSERT INTO O_TPARM
+	VALUES ("01eb4a9c-0609-43b5-b34e-92a0872cfa31",
+	"96887cfa-084f-45c3-b6c0-8fc29adfd456",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("a53b42af-dcf2-4c8e-8e85-80f1e275660a",
+	"96887cfa-084f-45c3-b6c0-8fc29adfd456",
+	'description',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"01eb4a9c-0609-43b5-b34e-92a0872cfa31",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<class_package>',
+	'',
+	'',
+	'../classes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("d4302f8f-7dd1-4a50-a398-4ba974982f57",
 	"8a0521ed-c9f9-45d3-9731-6feddbd586fc");
