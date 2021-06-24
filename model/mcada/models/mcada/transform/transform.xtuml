@@ -40,11 +40,20 @@ INSERT INTO S_SYNC
 	'',
 	'root_ep_pkg = param.root_ep_pkg;
 
-genfile = genfile::populate( name:"root_object", extension:"ads" );
-root_package = root_package::populate();
+root_package = root_package::populate( name:"Root_Object" );
+
+// The root package is in a file.
+genfile = genfile::populate( name:"Root_Object", extension:"ads" );
 relate root_package to genfile across R200;
 
-::transformPackage( ep_pkg:root_ep_pkg );',
+// transform components into domain packages
+select many c_cs related by root_ep_pkg->PE_PE[R8000]->C_C[R8001];
+select many ref_c_cs related by root_ep_pkg->PE_PE[R8000]->CL_IC[R8001]->C_C[R4201];
+all_c_cs = c_cs | ref_c_cs;
+for each c_c in all_c_cs
+  ::component2domain_package( c_c:c_c, root_package:root_package );
+end for;
+',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -75,7 +84,7 @@ INSERT INTO PE_PE
 INSERT INTO S_SYNC
 	VALUES ("044dfd91-f990-49d8-b9d3-f7cab2bd02a4",
 	"00000000-0000-0000-0000-000000000000",
-	'transformAttribute',
+	'attribute2field',
 	'',
 	'o_attr = param.o_attr;
 record = param.record;
@@ -191,15 +200,32 @@ INSERT INTO PE_PE
 INSERT INTO S_SYNC
 	VALUES ("2b5bfab2-31f8-45e9-8d97-ecbcbed73c8e",
 	"00000000-0000-0000-0000-000000000000",
-	'transformComponent',
+	'component2domain_package',
 	'',
 	'c_c = param.c_c;
+root_package = param.root_package;
 
-// transform packages
+// create genfile and domain package
+domain_package = domain_package::populate( name:c_c.Name, description:c_c.Descrip );
+relate domain_package to root_package across R3;
+
+// domain package is in a file
+filename = T::sub( format:"lr", s:root_package.name ) + "-" + T::sub( format:"lr", s:c_c.Name );
+genfile = genfile::populate( name:filename, extension:"ads" );
+relate domain_package to genfile across R200;
+
+
+// TODO transform types
+
+// transform classes to class packages
 select many inner_ep_pkgs related by c_c->PE_PE[R8003]->EP_PKG[R8001];
-for each inner_ep_pkg in inner_ep_pkgs
-  ::transformPackage(ep_pkg:inner_ep_pkg);
-end for;',
+select many o_objs related by inner_ep_pkgs->PE_PE[R8000]->O_OBJ[R8001];
+for each o_obj in o_objs
+  ::class2class_package( o_obj:o_obj, domain_package:domain_package );
+end for;
+
+// TODO transform functions
+// TODO transform scenarios',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -221,6 +247,22 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../../../../mcooa/models/mcooa/ooaofooa/Component/Component.xtuml');
+INSERT INTO S_SPARM
+	VALUES ("b74ed818-f8fa-4081-ae35-63642daa060b",
+	"2b5bfab2-31f8-45e9-8d97-ecbcbed73c8e",
+	'root_package',
+	"da67c6f1-2deb-482b-bee3-f480d0fcbc8c",
+	0,
+	'',
+	"b4d33fcb-db46-43d7-9ddb-d60e1b7baec7",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("da67c6f1-2deb-482b-bee3-f480d0fcbc8c",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<root_package>',
+	'',
+	'',
+	'../architecture/classes/classes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("2b5bfab2-31f8-45e9-8d97-ecbcbed73c8e",
 	1,
@@ -230,12 +272,21 @@ INSERT INTO PE_PE
 INSERT INTO S_SYNC
 	VALUES ("d40007e2-7750-4580-933b-eb2c480c2dc6",
 	"00000000-0000-0000-0000-000000000000",
-	'transformModelClass',
+	'class2class_package',
 	'',
 	'o_obj = param.o_obj;
-class_package = param.class_package;
+domain_package = param.domain_package;
 
-// class becomes record
+// class becomes a genfile containing package with a record
+class_package = class_package::populate( name:o_obj.Key_Lett, description:o_obj.Descrip );
+relate class_package to domain_package across R4;
+
+// domain package is in a file
+select one root_package related by domain_package->root_package[R3];
+filename = T::sub( format:"lr", s:root_package.name ) + "-" + T::sub( format:"lr", s:domain_package.name ) + "-" + T::sub( format:"lr", s:o_obj.Key_Lett );
+genfile = genfile::populate( name:filename, extension:"ads" );
+relate class_package to genfile across R200;
+
 create object instance record of record;
 record.name = o_obj.Key_Lett;
 relate record to class_package across R1;
@@ -243,7 +294,7 @@ relate record to class_package across R1;
 // attributes become fields
 select many o_attrs related by o_obj->O_ATTR[R102];
 for each o_attr in o_attrs
-  ::transformAttribute(o_attr:o_attr, record:record);
+  ::attribute2field( o_attr:o_attr, record:record );
 end for;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -269,77 +320,21 @@ INSERT INTO S_DT_PROXY
 INSERT INTO S_SPARM
 	VALUES ("cb425bce-6256-4b94-a761-8c3f72bfccf7",
 	"d40007e2-7750-4580-933b-eb2c480c2dc6",
-	'class_package',
-	"488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
+	'domain_package',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
 	0,
 	'',
 	"6f6defcf-633e-431e-b072-35db54bc0f3f",
 	'');
 INSERT INTO S_DT_PROXY
-	VALUES ("488d2f61-4ffa-4ce5-80dd-9c51f29a0a64",
+	VALUES ("73535d6a-209c-42ca-8802-bd03f5981206",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<class_package>',
+	'inst_ref<domain_package>',
 	'',
 	'',
 	'../architecture/classes/classes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("d40007e2-7750-4580-933b-eb2c480c2dc6",
-	1,
-	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
-	"00000000-0000-0000-0000-000000000000",
-	1);
-INSERT INTO S_SYNC
-	VALUES ("c4b2375c-cede-4754-be51-f5e63fae417c",
-	"00000000-0000-0000-0000-000000000000",
-	'transformPackage',
-	'',
-	'ep_pkg = param.ep_pkg;
-
-// create genfile and domain package
-genfile = genfile::populate( name:ep_pkg.Name, extension:"ads" );
-domain_package = domain_package::populate( name:ep_pkg.Name, description:ep_pkg.Descrip );
-relate domain_package to genfile across R200;
-
-// create genfile and class package
-genfile = genfile::populate( name:ep_pkg.Name, extension:"ads" );
-class_package = class_package::populate( name:ep_pkg.Name, description:ep_pkg.Descrip );
-relate class_package to genfile across R200;
-
-// transform classes
-select many o_objs related by ep_pkg->PE_PE[R8000]->O_OBJ[R8001];
-for each o_obj in o_objs
-  ::transformModelClass(o_obj:o_obj, class_package:class_package);
-end for;
-
-// transform components
-select many c_cs related by ep_pkg->PE_PE[R8000]->C_C[R8001];
-select many ref_c_cs related by ep_pkg->PE_PE[R8000]->CL_IC[R8001]->C_C[R4201];
-all_c_cs = c_cs | ref_c_cs;
-for each c_c in all_c_cs
-  ::transformComponent(c_c:c_c);
-end for;
-
-// transform inner packages
-select many inner_ep_pkgs related by ep_pkg->PE_PE[R8000]->EP_PKG[R8001];
-for each inner_ep_pkg in inner_ep_pkgs
-  ::transformPackage(ep_pkg:inner_ep_pkg);
-end for;',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'',
-	0,
-	0);
-INSERT INTO S_SPARM
-	VALUES ("f71a51f6-d95f-45e8-a4f0-924a6dad6b07",
-	"c4b2375c-cede-4754-be51-f5e63fae417c",
-	'ep_pkg',
-	"9939c670-a721-4742-a824-ed4b0df4acd6",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO PE_PE
-	VALUES ("c4b2375c-cede-4754-be51-f5e63fae417c",
 	1,
 	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
 	"00000000-0000-0000-0000-000000000000",

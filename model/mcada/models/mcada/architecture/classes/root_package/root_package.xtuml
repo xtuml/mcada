@@ -15,12 +15,23 @@ INSERT INTO O_TFR
 	"da67c6f1-2deb-482b-bee3-f480d0fcbc8c",
 	0,
 	'create object instance root_package of root_package;
+root_package.name = param.name;
+
 return root_package;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	1);
+INSERT INTO O_TPARM
+	VALUES ("ac3de04d-fc8f-4e64-bb58-32aef0a0a5fa",
+	"39d4c781-c81a-4172-932a-25b518ea4f8d",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
 INSERT INTO S_DT_PROXY
 	VALUES ("da67c6f1-2deb-482b-bee3-f480d0fcbc8c",
 	"00000000-0000-0000-0000-000000000000",
@@ -28,6 +39,26 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../classes.xtuml');
+INSERT INTO O_TFR
+	VALUES ("b4c34a58-a0ae-4e59-a3af-61774e59871e",
+	"ab090999-ef43-4f41-9d39-4db45f1f7351",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select many domain_packages related by self->domain_package[R3];
+for each domain_package in domain_packages
+  domain_package.render();
+end for;
+
+T::include( file:"package/t.root_package.ads" );
+T::emit( file:self.file_path );
+T::clear();',
+	1,
+	'',
+	"39d4c781-c81a-4172-932a-25b518ea4f8d",
+	0,
+	2);
 INSERT INTO O_NBATTR
 	VALUES ("e2785f90-49dd-409f-909e-fdeb9ed17909",
 	"ab090999-ef43-4f41-9d39-4db45f1f7351");

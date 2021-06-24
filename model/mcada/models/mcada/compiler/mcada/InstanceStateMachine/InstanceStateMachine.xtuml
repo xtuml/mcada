@@ -606,11 +606,8 @@ end if;
 LOG::LogInfo(message:"  done.");
 LOG::LogTime(message:"  Elapsed time:", t:TIM::current_clock() - start_time);
 
-// translate bodies
-LOG::LogInfo(message:"  Translating action language bodies...");
 // TODO translate bodies
-LOG::LogInfo(message:"  done.");
-LOG::LogTime(message:"  Elapsed time:", t:TIM::current_clock() - start_time);
+// LOG::LogInfo(message:"  Translating action language bodies...");
 
 generate mcada5:render() to self;
 ',
@@ -697,10 +694,10 @@ INSERT INTO SM_ACT
 	1,
 	'// render all files
 LOG::LogInfo(message:"  Rendering application...");
-select many genfiles from instances of genfile;
-for each genfile in genfiles
-  genfile.render();
-end for;
+select any root_package from instances of root_package;
+if ( not_empty root_package )
+  root_package.render();
+end if;
 
 generate mcada4:serialize() to self;',
 	'',

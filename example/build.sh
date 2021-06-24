@@ -40,7 +40,7 @@ cd gen/code_generation/build
 gnat make ../_ada/*
 
 # copy executable
-cp defineoven ../../../bin
+cp microwaveoven_defineoven ../../../bin
 
 echo "Done."
 exit 0

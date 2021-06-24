@@ -22,7 +22,7 @@ if ("" != type_ref.type_decorations)
   type_reference = type_reference + " " + type_ref.type_decorations;
 end if;
 */
-T::include(file:"package/t.field.ada");',
+T::include( file:"package/t.field.ada" );',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",

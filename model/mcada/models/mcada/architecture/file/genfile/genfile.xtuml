@@ -17,6 +17,14 @@ INSERT INTO O_TFR
 	'select one class_package related by self->class_package[R200];
 if ( not_empty class_package )
   class_package.render();
+end if;
+select one domain_package related by self->domain_package[R200];
+if ( not_empty domain_package )
+  domain_package.render();
+end if;
+select one root_package related by self->root_package[R200];
+if ( not_empty root_package )
+  root_package.render();
 end if;',
 	1,
 	'',

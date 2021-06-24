@@ -15,6 +15,9 @@ INSERT INTO O_TFR
 	"73535d6a-209c-42ca-8802-bd03f5981206",
 	0,
 	'create object instance domain_package of domain_package;
+domain_package.name = param.name;
+domain_package.description = param.description;
+
 return domain_package;',
 	1,
 	'',
@@ -46,6 +49,28 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../classes.xtuml');
+INSERT INTO O_TFR
+	VALUES ("71b19c10-7c48-4f60-a73e-29e005e2d43a",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one root_package related by self->root_package[R3];
+
+select many class_packages related by self->class_package[R4];
+for each class_package in class_packages
+  class_package.render();
+end for;
+
+T::include( file:"package/t.domain_package.ads" );
+T::emit( file:self.file_path );
+T::clear();',
+	1,
+	'',
+	"701c37f6-13ee-4497-9b20-a99dcbefca43",
+	0,
+	2);
 INSERT INTO O_NBATTR
 	VALUES ("a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
 	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
@@ -106,13 +131,31 @@ INSERT INTO O_BATTR_PROXY
 INSERT INTO O_ATTR
 	VALUES ("df2f0e7d-4b6b-40cf-a97e-37362a6c4cb5",
 	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
-	"a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	"fd7401df-1913-4dd0-8874-0e09ccc1e022",
 	'file_path',
 	'',
 	'',
 	'file_path',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("fd7401df-1913-4dd0-8874-0e09ccc1e022",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_BATTR
+	VALUES ("fd7401df-1913-4dd0-8874-0e09ccc1e022",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
+INSERT INTO O_ATTR
+	VALUES ("fd7401df-1913-4dd0-8874-0e09ccc1e022",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	"a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	'description',
+	'',
+	'',
+	'description',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
 INSERT INTO O_ID

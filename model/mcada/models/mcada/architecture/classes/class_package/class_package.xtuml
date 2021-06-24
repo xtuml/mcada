@@ -14,7 +14,9 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select many records related by self->record[R1];
+	'select one domain_package related by self->domain_package[R4];
+select one root_package related by domain_package->root_package[R3];
+select many records related by self->record[R1];
 if ( not_empty records )
   sep = "";
   for each record in records
@@ -23,8 +25,8 @@ if ( not_empty records )
     sep = "\n";
   end for;
   record_body = T::body();
-  T::include(file:"package/t.package.ads");
-  T::emit(file:self.file_path);
+  T::include( file:"package/t.class_package.ads" );
+  T::emit( file:self.file_path );
   T::clear();
 end if;',
 	1,
@@ -42,6 +44,7 @@ INSERT INTO O_TFR
 	'create object instance class_package of class_package;
 class_package.name = T::sub( format:"r", s:param.name );
 class_package.description = param.description;
+
 return class_package;',
 	1,
 	'',
