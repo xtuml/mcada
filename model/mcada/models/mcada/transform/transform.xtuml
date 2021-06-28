@@ -89,9 +89,8 @@ INSERT INTO S_SYNC
 	'o_attr = param.o_attr;
 record = param.record;
 
-// create attribute
-create object instance field of field;
-field.name = o_attr.Name;
+// attribute becomes field in record
+field = field::populate( name:o_attr.Name );
 relate field to record across R2;
 
 // link type
@@ -100,17 +99,13 @@ if ( s_dt.Name == "same_as<Base_Attribute>" )
   select one s_dt related by o_attr->O_RATTR[R106]->O_BATTR[R113]->O_ATTR[R106]->S_DT[R114];
 end if;
 
-/* CDS
-select any type from instances of Type where (selected.xtuml_type_name == s_dt.Name);
-create object instance type_ref of TypeReference;
-if (empty type)
+select any adatype from instances of adatype where ( selected.xtuml_name == s_dt.Name );
+adatyperef = adatyperef::populate( decoration:"" );
+if ( empty adatype )
   // TODO for now, if a type does not exist, create a new one...
-  create object instance type of Type;
-  type.name = "Integer";
-  type.xtuml_type_name = s_dt.Name;
+  adatype = adatype::populate( name:"integer", xtuml_name:s_dt.Name );
 end if;
-relate attr to type across R3901 using type_ref;
-*/',
+relate field to adatype across R5 using adatyperef;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -165,24 +160,21 @@ for each s_dt in s_dts
   select one c_c related by s_dt->PE_PE[R8001]->C_C[R8003];
   select one ep_pkg related by s_dt->PE_PE[R8001]->EP_PKG[R8000];
   if ( empty c_c and empty ep_pkg )
-    type_name = "Integer";
+    type_name = "Application_Types.Base_Integer_Type";
     if ( "boolean" == s_dt.Name )
-      type_name = "Boolean";
+      type_name = "Application_Types.Base_Boolean_Type";
     elif ( "integer" == s_dt.Name )
-      type_name = "Integer";
+      type_name = "Application_Types.Base_Integer_Type";
     elif ( "real" == s_dt.Name )
-      type_name = "Float";
+      type_name = "Application_Types.Base_Float_Type";
     elif ( "string" == s_dt.Name )
-      type_name = "String";
+      type_name = "Application_Types.Base_String_Type";
     else
       // TODO finish mapping all built-in types to Ada types
     end if;
-    if ("" != type_name) 
-      /* CDS
-      create object instance type of Type;
-      type.name = type_name;
-      type.xtuml_type_name = s_dt.Name;
-      */
+    if ( "" != type_name )
+      create object instance adatype of adatype;
+      adatype = adatype::populate( name:type_name, xtuml_name:s_dt.Name );
     end if;
   end if;
 end for;',

@@ -166,6 +166,11 @@ INSERT INTO O_OIDA
 	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
 	0,
 	'file_path');
+INSERT INTO O_OIDA
+	VALUES ("a78ff88d-8c4f-4ce1-8e3f-02d9874a4f2b",
+	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
+	0,
+	'name');
 INSERT INTO O_ID
 	VALUES (1,
 	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9");
