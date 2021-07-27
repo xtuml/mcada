@@ -314,7 +314,7 @@ INSERT INTO GD_GE
 	"e0d3101b-2c8a-4dc7-8160-bca77d217fb2",
 	23,
 	0,
-	'mcada::architecture::file::root');
+	'mcada::architecture::file::root_package');
 INSERT INTO GD_SHP
 	VALUES ("162d77f5-75c8-4175-9fd0-d08f95d0f5d5");
 INSERT INTO GD_NCS
@@ -343,7 +343,7 @@ INSERT INTO GD_GE
 	"fa73d986-66ec-4a22-b08e-bc81779b16f1",
 	35,
 	0,
-	'mcada::architecture::file::R200::root');
+	'mcada::architecture::file::R200::root_package');
 INSERT INTO GD_CON
 	VALUES ("c2dea2f5-866e-4a76-ae4a-fe641fea6083",
 	"00000000-0000-0000-0000-000000000000");
@@ -443,7 +443,7 @@ INSERT INTO GD_GE
 	"9cd04277-f86d-48d1-bb18-70406a709d4b",
 	23,
 	0,
-	'mcada::architecture::file::domain_object');
+	'mcada::architecture::file::domain_package');
 INSERT INTO GD_SHP
 	VALUES ("78cf0398-ea67-4330-a1cd-a1e86df80392");
 INSERT INTO GD_NCS
@@ -472,7 +472,7 @@ INSERT INTO GD_GE
 	"4780cf4d-2dce-4d0e-8090-94ce72858891",
 	35,
 	0,
-	'mcada::architecture::file::R200::domain_object');
+	'mcada::architecture::file::R200::domain_package');
 INSERT INTO GD_CON
 	VALUES ("e61d2bfd-ba45-4b21-994e-ee8c7780f2d5",
 	"00000000-0000-0000-0000-000000000000");
@@ -686,12 +686,12 @@ INSERT INTO R_OIR
 	"e0d3101b-2c8a-4dc7-8160-bca77d217fb2");
 INSERT INTO O_OBJ_PROXY
 	VALUES ("ab090999-ef43-4f41-9d39-4db45f1f7351",
-	'root',
+	'root_package',
 	103,
-	'root',
+	'root_package',
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'../classes/root/root.xtuml');
+	'../classes/root_package/root_package.xtuml');
 INSERT INTO R_SUB
 	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
 	"8cebbeea-36b8-4776-8c9b-c218273aa306",
@@ -707,12 +707,12 @@ INSERT INTO R_OIR
 	"9cd04277-f86d-48d1-bb18-70406a709d4b");
 INSERT INTO O_OBJ_PROXY
 	VALUES ("d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
-	'domain_object',
+	'domain_package',
 	104,
-	'domain_object',
+	'domain_package',
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'../classes/domain_object/domain_object.xtuml');
+	'../classes/domain_package/domain_package.xtuml');
 INSERT INTO PE_PE
 	VALUES ("8cebbeea-36b8-4776-8c9b-c218273aa306",
 	1,
@@ -737,8 +737,8 @@ INSERT INTO O_IOBJ
 	"ab090999-ef43-4f41-9d39-4db45f1f7351",
 	0,
 	"00000000-0000-0000-0000-000000000000",
-	'root',
-	'root');
+	'root_package',
+	'root_package');
 INSERT INTO PE_PE
 	VALUES ("e0d3101b-2c8a-4dc7-8160-bca77d217fb2",
 	1,
@@ -750,8 +750,8 @@ INSERT INTO O_IOBJ
 	"d8cf8951-7703-4a46-9a86-72e9a1dd0ca9",
 	0,
 	"00000000-0000-0000-0000-000000000000",
-	'domain_object',
-	'domain_object');
+	'domain_package',
+	'domain_package');
 INSERT INTO PE_PE
 	VALUES ("9cd04277-f86d-48d1-bb18-70406a709d4b",
 	1,
