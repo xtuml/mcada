@@ -43,6 +43,7 @@ INSERT INTO O_TFR
 	0,
 	'create object instance class_package of class_package;
 class_package.name = T::sub( format:"r", s:param.name );
+class_package.long_name = param.long_name;
 class_package.description = param.description;
 
 return class_package;',
@@ -64,6 +65,15 @@ INSERT INTO O_TPARM
 	VALUES ("a53b42af-dcf2-4c8e-8e85-80f1e275660a",
 	"96887cfa-084f-45c3-b6c0-8fc29adfd456",
 	'description',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"99407116-189a-499a-b9f1-0acf9ff8c519",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("99407116-189a-499a-b9f1-0acf9ff8c519",
+	"96887cfa-084f-45c3-b6c0-8fc29adfd456",
+	'long_name',
 	"ba5eda7a-def5-0000-0000-000000000004",
 	0,
 	'',
@@ -103,7 +113,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("a2696464-d9c8-4496-9fcd-0d801fe4a08f",
 	"8a0521ed-c9f9-45d3-9731-6feddbd586fc",
-	"d4302f8f-7dd1-4a50-a398-4ba974982f57",
+	"7259067d-242a-40d9-9e6c-9ec65f7ccb4f",
 	'description',
 	'',
 	'',
@@ -161,6 +171,24 @@ INSERT INTO O_ATTR
 	'full_path',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("7259067d-242a-40d9-9e6c-9ec65f7ccb4f",
+	"8a0521ed-c9f9-45d3-9731-6feddbd586fc");
+INSERT INTO O_BATTR
+	VALUES ("7259067d-242a-40d9-9e6c-9ec65f7ccb4f",
+	"8a0521ed-c9f9-45d3-9731-6feddbd586fc");
+INSERT INTO O_ATTR
+	VALUES ("7259067d-242a-40d9-9e6c-9ec65f7ccb4f",
+	"8a0521ed-c9f9-45d3-9731-6feddbd586fc",
+	"d4302f8f-7dd1-4a50-a398-4ba974982f57",
+	'long_name',
+	'',
+	'',
+	'long_name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
 INSERT INTO O_ID

@@ -1,0 +1,246 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'typeref',
+	3752,
+	'typeref',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("aefee7ed-367b-4eff-90c0-103467badc2e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'  mybody = self.body;
+  if ( STRING::indexof( haystack:mybody, needle:"instance of" ) > -1 )
+    // WASL uses classname_IH for instance handles.
+    mybody = STRING::substr( s:mybody, begin:12, end:STRING::strlen( s:mybody ) );
+    mybody = mybody + "_IH";
+  else
+    doublecolon = STRING::indexof( haystack:mybody, needle:"::" );
+    if ( doublecolon > -1 )
+      mybody = STRING::substr( s:mybody, begin:doublecolon + 2, end:STRING::strlen( s:mybody ) );
+    end if;
+  end if;
+  T::include( file:"package/t.typeref.ada" );',
+	1,
+	'',
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("d0c00362-acc8-4a44-9bfe-87852a0796df",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'populate',
+	'',
+	"dbc69853-53b0-452c-b532-4557c97519fa",
+	0,
+	'domain = param.domain;
+// A type reference will never already exist.
+// Every encounter with a type reference is a new instance.
+create object instance typeref of typeref;
+typeref.body = param.body;
+/* CDS
+if ( "" != param.name )
+  select any referred_type related by domain->type[R3719] where ( selected.name == param.name );
+  if ( not_empty referred_type )
+    relate typeref to referred_type across R3762.''refers to'';
+  end if;
+end if;
+
+// relate to parent
+parent_parameter = param.parent_parameter;
+parent_operation = param.parent_operation;
+parent_attribute = param.parent_attribute;
+parent_routine = param.parent_routine;
+parent_member = param.parent_member;
+if ( not_empty parent_parameter )
+  relate typeref to parent_parameter across R3742;
+elif ( not_empty parent_operation )
+  relate typeref to parent_operation across R3741;
+elif ( not_empty parent_attribute )
+  relate typeref to parent_attribute across R3717;
+elif ( not_empty parent_routine )
+  relate typeref to parent_routine across R3792;
+elif ( not_empty parent_member )
+  relate typeref to parent_member across R3753;
+else
+  // no parent when linking to a namedref
+end if;
+*/
+return typeref;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("7ebfe48d-4d07-4347-9827-f50f92cdd488",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"f78da368-80ef-4c44-bc82-a731aa72e1c3",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("f78da368-80ef-4c44-bc82-a731aa72e1c3",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'domain',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"d09bd35e-5cf9-4ffb-85f4-71fc96a3d12a",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("d09bd35e-5cf9-4ffb-85f4-71fc96a3d12a",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'body',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"7ebfe48d-4d07-4347-9827-f50f92cdd488",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("0223cf76-3457-4830-816b-1aa316c52886",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'parent_parameter',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"f78da368-80ef-4c44-bc82-a731aa72e1c3",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("1c2c3978-76f4-4724-9e4e-44c31dab65a4",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'parent_operation',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"0223cf76-3457-4830-816b-1aa316c52886",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("6ca428f4-d981-4966-a875-9b8cdbdc1c92",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'parent_attribute',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"1c2c3978-76f4-4724-9e4e-44c31dab65a4",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("03cf8a5e-1968-4755-b436-be219eb6faae",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'parent_routine',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"6ca428f4-d981-4966-a875-9b8cdbdc1c92",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("424d0310-8121-4efa-9dd0-f28673a6779d",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'parent_member',
+	"e25f2ff9-5845-47c3-881e-42fec92027f3",
+	0,
+	'',
+	"03cf8a5e-1968-4755-b436-be219eb6faae",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("e25f2ff9-5845-47c3-881e-42fec92027f3",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<member>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO S_DT_PROXY
+	VALUES ("dbc69853-53b0-452c-b532-4557c97519fa",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<typeref>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("da937746-cbc0-4bb4-9687-3868c1f18ce5",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	1,
+	'valid = true;
+
+// validate body
+if ( "" == self.body )
+  TRACE::log( flavor:"failure", id:101, message:"typeref has no body." );
+  valid = false;
+  return valid;		// short circuit
+end if;
+
+return valid;',
+	1,
+	'',
+	"3984449f-3d31-4078-a5b0-327237bc15be",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("3984449f-3d31-4078-a5b0-327237bc15be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[7] = "";
+emptyvalue[7] = ""; emptyvalue[6] = ""; emptyvalue[5] = ""; emptyvalue[4] = ""; emptyvalue[3] = ""; emptyvalue[2] = ""; emptyvalue[1] = ""; emptyvalue[0] = "";
+
+value[0] = self.body;
+//out::tostring( element:"typeref", value:value );
+//out::tostring( element:"typeref", value:emptyvalue );',
+	1,
+	'',
+	"aefee7ed-367b-4eff-90c0-103467badc2e",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"00000000-0000-0000-0000-000000000000",
+	'body',
+	'',
+	'',
+	'body',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ID
+	VALUES (1,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ID
+	VALUES (2,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO PE_PE
+	VALUES ("a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

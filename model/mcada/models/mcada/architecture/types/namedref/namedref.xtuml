@@ -1,0 +1,139 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	'namedref',
+	3763,
+	'namedref',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("5c856c18-f60e-4d9e-a04e-4d8f2b7a0090",
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one typeref related by self->typeref[R3763];
+typeref.render();
+',
+	1,
+	'',
+	"598eea0b-defe-480c-9a9f-02005ea2f640",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("598eea0b-defe-480c-9a9f-02005ea2f640",
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	'populate',
+	'',
+	"32e0589c-7640-48c2-a435-99bbc69aaeb0",
+	0,
+	'domain = param.domain;
+create object instance namedref of namedref;
+/* CDS
+relate namedref to domain across R3768;
+select any empty_parent_parameter from instances of parameter where ( false );
+select any empty_parent_operation from instances of operation where ( false );
+select any empty_parent_attribute from instances of attribute where ( false );
+select any empty_parent_routine from instances of routine where ( false );
+select any empty_parent_member from instances of member where ( false );
+typeref = typeref::populate( name:param.name, body:param.name, domain:domain,
+                   parent_parameter:empty_parent_parameter,
+                   parent_operation:empty_parent_operation,
+                   parent_attribute:empty_parent_attribute,
+                   parent_routine:empty_parent_routine,
+                   parent_member:empty_parent_member );
+relate namedref to typeref across R3763;
+*/
+return namedref;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("195fdbd3-8631-49f6-8cb2-e649067bd2a1",
+	"598eea0b-defe-480c-9a9f-02005ea2f640",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("70ac6d1a-1679-4fb8-80aa-f9fab1ace121",
+	"598eea0b-defe-480c-9a9f-02005ea2f640",
+	'domain',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"195fdbd3-8631-49f6-8cb2-e649067bd2a1",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("32e0589c-7640-48c2-a435-99bbc69aaeb0",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<namedref>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("0f68fc82-4f6f-41e0-9b7f-e995849c8205",
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  TRACE::log( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"5d897357-0214-42bd-b3ba-ba4d5026a21c",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("5d897357-0214-42bd-b3ba-ba4d5026a21c",
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"5c856c18-f60e-4d9e-a04e-4d8f2b7a0090",
+	0,
+	0);
+INSERT INTO O_ID
+	VALUES (0,
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d");
+INSERT INTO O_ID
+	VALUES (1,
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d");
+INSERT INTO O_ID
+	VALUES (2,
+	"cb4ff4c7-20d9-43de-a415-a0bfb354170d");
+INSERT INTO PE_PE
+	VALUES ("cb4ff4c7-20d9-43de-a415-a0bfb354170d",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

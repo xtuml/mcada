@@ -1,0 +1,185 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	'range',
+	3760,
+	'range',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("5618e6ad-1168-4b1d-986d-ea0da814abcb",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'T::include( file:"package/t.range.ada" );
+',
+	1,
+	'',
+	"a164ea37-07b3-48db-b3c0-0906300c112d",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("a164ea37-07b3-48db-b3c0-0906300c112d",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	'populate',
+	'',
+	"3e1431a9-3d78-4e04-a999-254a69a21bdb",
+	0,
+	'parent_type = param.type;
+/* CDS
+select one domain related by parent_type->domain[R3719];
+constraint = constraint::populate( name:parent_type.body, domain:domain );
+relate constraint to parent_type across R3751;
+*/
+create object instance range of range;
+//relate range to constraint across R3757;
+range.minimum = param.minimum;
+range.maximum = param.maximum;
+return range;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("ce53e2ca-dd87-49b7-bd8f-92dcbd6ecc2c",
+	"a164ea37-07b3-48db-b3c0-0906300c112d",
+	'type',
+	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<type>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TPARM
+	VALUES ("5c0b9094-caff-4f9b-ad14-3d6abb307d92",
+	"a164ea37-07b3-48db-b3c0-0906300c112d",
+	'minimum',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"ce53e2ca-dd87-49b7-bd8f-92dcbd6ecc2c",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("bfc6e27e-7ffb-4a0f-a4e7-325c12b54ca5",
+	"a164ea37-07b3-48db-b3c0-0906300c112d",
+	'maximum',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"5c0b9094-caff-4f9b-ad14-3d6abb307d92",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("3e1431a9-3d78-4e04-a999-254a69a21bdb",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<range>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("8171db65-b62f-4301-aa59-01e9ec96e0bb",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  TRACE::log( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"c41e6942-6d5e-4524-989d-249af162e371",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("c41e6942-6d5e-4524-989d-249af162e371",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.minimum;
+value[1] = self.maximum;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"5618e6ad-1168-4b1d-986d-ea0da814abcb",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("aaea0017-87d6-40cd-ac1c-eddf4ddbec3a",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_BATTR
+	VALUES ("aaea0017-87d6-40cd-ac1c-eddf4ddbec3a",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_ATTR
+	VALUES ("aaea0017-87d6-40cd-ac1c-eddf4ddbec3a",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	"00000000-0000-0000-0000-000000000000",
+	'minimum',
+	'',
+	'',
+	'minimum',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("ba14e583-7ef8-46a0-9664-e11287d54358",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_BATTR
+	VALUES ("ba14e583-7ef8-46a0-9664-e11287d54358",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_ATTR
+	VALUES ("ba14e583-7ef8-46a0-9664-e11287d54358",
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	"aaea0017-87d6-40cd-ac1c-eddf4ddbec3a",
+	'maximum',
+	'',
+	'',
+	'maximum',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_ID
+	VALUES (1,
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO O_ID
+	VALUES (2,
+	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
+INSERT INTO PE_PE
+	VALUES ("db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

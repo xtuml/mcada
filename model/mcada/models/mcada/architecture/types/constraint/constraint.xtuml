@@ -1,0 +1,187 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("86e3569e-a248-4d04-9a50-35aa00312f06",
+	'constraint',
+	3755,
+	'constraint',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("d3e586bc-b653-4687-8043-71bdd2e77efe",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one type related by self->type[R3751];
+select one namedref related by self->namedref[R3774];
+T::include( file:"package/t.constraint.ada" );
+namedref.render();
+select one range related by self->range[R3757];
+range.render();
+',
+	1,
+	'',
+	"39a85b38-77b1-48fa-a491-553c040c5aa4",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("39a85b38-77b1-48fa-a491-553c040c5aa4",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	'populate',
+	'',
+	"29436fee-319a-4126-8e0b-1a9188e95a7a",
+	0,
+	'domain = param.domain;
+create object instance constraint of constraint;
+namedref = namedref::populate( name:param.name, domain:domain );
+relate namedref to constraint across R3774;
+return constraint;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("a67f103d-7117-47e1-8178-24245951088c",
+	"39a85b38-77b1-48fa-a491-553c040c5aa4",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("854593ec-525e-41fa-a21e-f4204bb8029e",
+	"39a85b38-77b1-48fa-a491-553c040c5aa4",
+	'domain',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"a67f103d-7117-47e1-8178-24245951088c",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("29436fee-319a-4126-8e0b-1a9188e95a7a",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<constraint>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("46651216-9d12-41c8-ae87-f4ba0968cede",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  TRACE::log( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"3dfe2821-8fd2-4f98-bec5-cee7687ec4d9",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("3dfe2821-8fd2-4f98-bec5-cee7687ec4d9",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"d3e586bc-b653-4687-8043-71bdd2e77efe",
+	0,
+	0);
+INSERT INTO O_REF
+	VALUES ("86e3569e-a248-4d04-9a50-35aa00312f06",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	0,
+	"f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"ad3386e6-8a24-48d5-b173-ce1c0d011812",
+	"eb0514b8-8ee5-4571-b880-820a41f8676b",
+	"d0872a09-304a-43e1-9fbf-36e43ae37c2a",
+	"fc9d10d4-e92f-479e-bbb3-2cc67da078c5",
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'type',
+	'name',
+	'R3751');
+INSERT INTO R_RGO_PROXY
+	VALUES ("86e3569e-a248-4d04-9a50-35aa00312f06",
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"ad3386e6-8a24-48d5-b173-ce1c0d011812",
+	'../types.xtuml');
+INSERT INTO O_RTIDA_PROXY
+	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	0,
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"eb0514b8-8ee5-4571-b880-820a41f8676b",
+	'../types.xtuml');
+INSERT INTO O_RATTR
+	VALUES ("d0872a09-304a-43e1-9fbf-36e43ae37c2a",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	"f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	1,
+	'name');
+INSERT INTO O_BATTR_PROXY
+	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	'../type/type.xtuml');
+INSERT INTO O_ATTR
+	VALUES ("d0872a09-304a-43e1-9fbf-36e43ae37c2a",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"86e3569e-a248-4d04-9a50-35aa00312f06");
+INSERT INTO O_OIDA
+	VALUES ("d0872a09-304a-43e1-9fbf-36e43ae37c2a",
+	"86e3569e-a248-4d04-9a50-35aa00312f06",
+	0,
+	'name');
+INSERT INTO O_ID
+	VALUES (1,
+	"86e3569e-a248-4d04-9a50-35aa00312f06");
+INSERT INTO O_ID
+	VALUES (2,
+	"86e3569e-a248-4d04-9a50-35aa00312f06");
+INSERT INTO PE_PE
+	VALUES ("86e3569e-a248-4d04-9a50-35aa00312f06",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');
