@@ -2,9 +2,9 @@
 
 INSERT INTO O_OBJ
 	VALUES ("ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
-	'type',
+	'adatype',
 	3751,
-	'type',
+	'adatype',
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
@@ -58,7 +58,7 @@ INSERT INTO O_TFR
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
 	'domain = param.domain;
-select any type from instances of type;
+select any adatype from instances of adatype;
 /* CDS
 select any type related by domain->type[R3719] where ( selected.name == param.name );
 if ( empty type )
@@ -78,7 +78,7 @@ if ( empty type )
   relate type to markable across R3783;
 end if;
 */
-return type;',
+return adatype;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -123,7 +123,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<type>',
+	'inst_ref<adatype>',
 	'',
 	'',
 	'../types.xtuml');
@@ -246,30 +246,30 @@ INSERT INTO O_TFR
 	0,
 	'domain = param.domain;
 count = 1;
-select many types from instances of type;
-//select many types related by domain->type[R3719] where ( not selected.rendered );
+select many adatypes from instances of adatype;
+//select many adatypes related by domain->adatype[R3719] where ( not selected.rendered );
 if ( "public" == param.scope )
   // For the interface file, we render only public types.
-  //select many types related by domain->type[R3719] where ( ( not selected.rendered ) and ( selected.visibility == param.scope ) );
+  //select many adatypes related by domain->adatype[R3719] where ( ( not selected.rendered ) and ( selected.visibility == param.scope ) );
 end if;
-count = cardinality types;
+count = cardinality adatypes;
 prev_count = count + 1;
 while ( count < prev_count )
   prev_count = count;
-  for each type in types
-    select any reference related by type->reference[R3777.''refers_to''] where ( not selected.resolved );
+  for each adatype in adatypes
+    select any reference related by adatype->reference[R3777.''refers_to''] where ( not selected.resolved );
     if ( empty reference )
-      if ( ( "public" == type.visibility ) or ( "private" == param.scope ) )
-        type.render();
+      if ( ( "public" == adatype.visibility ) or ( "private" == param.scope ) )
+        adatype.render();
       end if;
     end if;
   end for;
-  //select many types related by domain->type[R3719] where ( not selected.rendered );
+  //select many adatypes related by domain->adatype[R3719] where ( not selected.rendered );
   if ( "public" == param.scope )
     // For the interface file, we render only public types.
-    //select many types related by domain->type[R3719] where ( ( not selected.rendered ) and ( selected.visibility == param.scope ) );
+    //select many adatypes related by domain->adatype[R3719] where ( ( not selected.rendered ) and ( selected.visibility == param.scope ) );
   end if;
-  count = cardinality types;
+  count = cardinality adatypes;
 end while;
 return count;
 ',
@@ -313,35 +313,36 @@ for each reference in references
 end for;
 guard = cardinality references; // Limit the cycles of looping.
 // Link up the references.
-select many types from instances of type;
-//select many types related by domain->type[R3719];
+select many adatypes from instances of adatype;
+//select many types related by domain->adatype[R3719];
 if ( "public" == param.scope )
   // For the interface file, we render only public types.
-  //select many types related by domain->type[R3719] where ( selected.visibility == param.scope );
+  //select many adatypes related by domain->adatype[R3719] where ( selected.visibility == param.scope );
 end if;
-for each type in types
-  type.rendered = false;
-  type.declared_forward = false;
-  type.populate_references();
+for each adatype in adatypes
+  adatype.rendered = false;
+  adatype.declared_forward = false;
+  adatype.populate_references();
 end for;
 
 // Provide forward declarations for self-referential types.
 //select many references related by domain->reference[R3776.''contains''] where ( selected.parent_name == selected.child_name );
 for each reference in references
-  select one type related by reference->type[R3777.''refers_to''];
-  if ( ( not type.rendered ) and ( ( "public" == type.visibility ) or ( "private" == param.scope ) ) )
-    type.render_forward();
+  select one adatype related by reference->adatype[R3777.''refers_to''];
+  if ( ( not adatype.rendered ) and ( ( "public" == adatype.visibility ) or ( "private" == param.scope ) ) )
+    adatype.render_forward();
   end if;
 end for;
 
 // Render leaf types (those with no unresolved references).
-while ( 0 < type::render_leaves( domain:domain, scope:param.scope ) )
+while ( 0 < adatype::render_leaves( domain:domain, scope:param.scope ) )
   // Break a cycle by selecting any referenced type and resolving it.
   //select any reference related by domain->reference[R3776] where ( not selected.resolved );
   //select one type related by reference->type[R3777.''refers_to''];
-  if ( not_empty type )
-    if ( ( "public" == type.visibility ) or ( "private" == param.scope ) )
-      type.render_forward();
+  select any adatype from instances of adatype where false; // CDS
+  if ( not_empty adatype )
+    if ( ( "public" == adatype.visibility ) or ( "private" == param.scope ) )
+      adatype.render_forward();
     end if;
   else
     TRACE::log( flavor:"failure", id:121, message:"did not find cyclic unresolved type" );
@@ -435,27 +436,6 @@ INSERT INTO O_NBATTR
 INSERT INTO O_BATTR
 	VALUES ("20fe661e-806e-4660-83ef-46af7633976b",
 	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e");
-INSERT INTO S_DIM
-	VALUES (1024,
-	0,
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
-	"20fe661e-806e-4660-83ef-46af7633976b",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"d2a798ab-8fdf-4bdd-a01c-4dce4675bd43",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_ATTR
 	VALUES ("20fe661e-806e-4660-83ef-46af7633976b",
 	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
@@ -466,7 +446,7 @@ INSERT INTO O_ATTR
 	'labels',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000004",
-	'[label::max]',
+	'',
 	'');
 INSERT INTO O_NBATTR
 	VALUES ("6149c95f-6f9a-49bc-89a9-a0fdeec72db7",

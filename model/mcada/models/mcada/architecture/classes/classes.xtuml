@@ -597,7 +597,7 @@ INSERT INTO GD_GE
 	"5e275fe4-7f57-4dfa-9430-4f8f88f6456d",
 	21,
 	0,
-	'mcada::architecture::classes::adatype');
+	'mcada::architecture::classes::adatype1');
 INSERT INTO GD_SHP
 	VALUES ("2ce74fc2-4ef2-4a72-a36b-4d4177d03783");
 INSERT INTO GD_NCS
@@ -1064,7 +1064,7 @@ INSERT INTO PE_PE
 INSERT INTO S_DT
 	VALUES ("b1e9d6a3-178f-43b5-b367-ce1089b462d8",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<adatype>',
+	'inst_ref<adatype1>',
 	'',
 	'');
 INSERT INTO S_IRDT
@@ -1073,12 +1073,12 @@ INSERT INTO S_IRDT
 	"5e275fe4-7f57-4dfa-9430-4f8f88f6456d");
 INSERT INTO O_OBJ_PROXY
 	VALUES ("5e275fe4-7f57-4dfa-9430-4f8f88f6456d",
-	'adatype',
+	'adatype1',
 	105,
-	'adatype',
+	'adatype1',
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'./adatype/adatype.xtuml');
+	'./adatype1/adatype1.xtuml');
 INSERT INTO PE_PE
 	VALUES ("b1e9d6a3-178f-43b5-b367-ce1089b462d8",
 	1,
@@ -1088,7 +1088,7 @@ INSERT INTO PE_PE
 INSERT INTO S_DT
 	VALUES ("4ebdbdd5-6e96-483f-a75b-3c1fcb91d94c",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref_set<adatype>',
+	'inst_ref_set<adatype1>',
 	'',
 	'');
 INSERT INTO S_IRDT

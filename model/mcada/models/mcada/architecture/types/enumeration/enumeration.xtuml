@@ -14,7 +14,7 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one type related by self->type[R3751];
+	'select one adatype related by self->adatype[R3751];
 T::include( file:"package/t.enumeration_begin.ada" );
 // Get the first member.
 select any sibling related by self->enumerator[R3755];
@@ -63,7 +63,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<type>',
+	'inst_ref<adatype>',
 	'',
 	'',
 	'../types.xtuml');
@@ -125,7 +125,7 @@ INSERT INTO O_REF
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
-	'type',
+	'adatype',
 	'name',
 	'R3751');
 INSERT INTO R_RGO_PROXY
@@ -150,7 +150,7 @@ INSERT INTO O_RATTR
 INSERT INTO O_BATTR_PROXY
 	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
 	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
-	'../type/type.xtuml');
+	'../adatype/adatype.xtuml');
 INSERT INTO O_ATTR
 	VALUES ("a0e68979-bd69-4403-b403-aca4ac8d74e9",
 	"01f9f4df-d412-444f-84dd-fe407186a558",

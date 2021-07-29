@@ -177,13 +177,13 @@ if ( s_dt.Name == "same_as<Base_Attribute>" )
   select one s_dt related by o_attr->O_RATTR[R106]->O_BATTR[R113]->O_ATTR[R106]->S_DT[R114];
 end if;
 
-select any adatype from instances of adatype where ( selected.xtuml_name == s_dt.Name );
+select any adatype1 from instances of adatype1 where ( selected.xtuml_name == s_dt.Name );
 adatyperef = adatyperef::populate( decoration:"" );
-if ( empty adatype )
+if ( empty adatype1 )
   // TODO for now, if a type does not exist, create a new one...
-  adatype = adatype::populate( name:"integer", xtuml_name:s_dt.Name );
+  adatype1 = adatype1::populate( name:"integer", xtuml_name:s_dt.Name );
 end if;
-relate field to adatype across R5 using adatyperef;',
+relate field to adatype1 across R5 using adatyperef;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -251,8 +251,8 @@ for each s_dt in s_dts
       // TODO finish mapping all built-in types to Ada types
     end if;
     if ( "" != type_name )
-      create object instance adatype of adatype;
-      adatype = adatype::populate( name:type_name, xtuml_name:s_dt.Name );
+      create object instance adatype1 of adatype1;
+      adatype1 = adatype1::populate( name:type_name, xtuml_name:s_dt.Name );
     end if;
   end if;
 end for;',

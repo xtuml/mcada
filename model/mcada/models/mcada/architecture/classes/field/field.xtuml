@@ -16,8 +16,8 @@ INSERT INTO O_TFR
 	1,
 	'type_reference = "integer";
 select one adatyperef related by self->adatyperef[R5];
-select one adatype related by adatyperef->adatype[R5];
-type_reference = adatype.name;
+select one adatype1 related by adatyperef->adatype1[R5];
+type_reference = adatype1.name;
 if ( "" != adatyperef.decoration )
   type_reference = type_reference + " " + adatyperef.decoration;
 end if;

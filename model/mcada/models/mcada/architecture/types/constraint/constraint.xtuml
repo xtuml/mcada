@@ -14,11 +14,11 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one type related by self->type[R3751];
+	'select one adatype related by self->adatype[R3751];
 select one namedref related by self->namedref[R3774];
 T::include( file:"package/t.constraint.ada" );
 namedref.render();
-select one range related by self->range[R3757];
+select one range related by self->range_span[R3757];
 range.render();
 ',
 	1,
@@ -119,7 +119,7 @@ INSERT INTO O_REF
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
-	'type',
+	'adatype',
 	'name',
 	'R3751');
 INSERT INTO R_RGO_PROXY
@@ -144,7 +144,7 @@ INSERT INTO O_RATTR
 INSERT INTO O_BATTR_PROXY
 	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
 	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
-	'../type/type.xtuml');
+	'../adatype/adatype.xtuml');
 INSERT INTO O_ATTR
 	VALUES ("d0872a09-304a-43e1-9fbf-36e43ae37c2a",
 	"86e3569e-a248-4d04-9a50-35aa00312f06",

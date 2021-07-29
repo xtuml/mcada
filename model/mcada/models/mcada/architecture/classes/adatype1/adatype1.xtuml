@@ -2,9 +2,9 @@
 
 INSERT INTO O_OBJ
 	VALUES ("5e275fe4-7f57-4dfa-9430-4f8f88f6456d",
-	'adatype',
+	'adatype1',
 	105,
-	'adatype',
+	'adatype1',
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
@@ -14,10 +14,10 @@ INSERT INTO O_TFR
 	'',
 	"b1e9d6a3-178f-43b5-b367-ce1089b462d8",
 	0,
-	'create object instance adatype of adatype;
-adatype.name = param.name;
-adatype.xtuml_name = param.xtuml_name;
-return adatype;',
+	'create object instance adatype1 of adatype1;
+adatype1.name = param.name;
+adatype1.xtuml_name = param.xtuml_name;
+return adatype1;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -44,7 +44,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("b1e9d6a3-178f-43b5-b367-ce1089b462d8",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<adatype>',
+	'inst_ref<adatype1>',
 	'',
 	'',
 	'../classes.xtuml');
