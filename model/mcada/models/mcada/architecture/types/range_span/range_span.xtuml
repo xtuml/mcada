@@ -2,9 +2,9 @@
 
 INSERT INTO O_OBJ
 	VALUES ("db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
-	'range',
+	'range_span',
 	3760,
-	'range',
+	'range_span',
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
@@ -34,11 +34,11 @@ select one domain related by parent_type->domain[R3719];
 constraint = constraint::populate( name:parent_type.body, domain:domain );
 relate constraint to parent_type across R3751;
 */
-create object instance range of range;
+create object instance range_span of range_span;
 //relate range to constraint across R3757;
-range.minimum = param.minimum;
-range.maximum = param.maximum;
-return range;',
+range_span.minimum = param.minimum;
+range_span.maximum = param.maximum;
+return range_span;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -81,7 +81,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("3e1431a9-3d78-4e04-a999-254a69a21bdb",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<range>',
+	'inst_ref<range_span>',
 	'',
 	'',
 	'../types.xtuml');

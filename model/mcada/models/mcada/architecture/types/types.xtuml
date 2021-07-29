@@ -1441,7 +1441,7 @@ INSERT INTO GD_GE
 	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
 	21,
 	0,
-	'mcada::architecture::types::range');
+	'mcada::architecture::types::range_span');
 INSERT INTO GD_SHP
 	VALUES ("6c03048b-7113-46e2-9a5b-415513d910cf");
 INSERT INTO GD_NCS
@@ -1638,7 +1638,7 @@ INSERT INTO GD_GE
 	"fb868d45-c5f0-4065-9878-189d2b0addf5",
 	35,
 	0,
-	'mcada::architecture::types::R3757::range');
+	'mcada::architecture::types::R3757::range_span');
 INSERT INTO GD_CON
 	VALUES ("ace4ccc8-bcf4-4607-9970-f554709dc447",
 	"00000000-0000-0000-0000-000000000000");
@@ -4107,7 +4107,7 @@ INSERT INTO PE_PE
 INSERT INTO S_DT
 	VALUES ("3e1431a9-3d78-4e04-a999-254a69a21bdb",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<range>',
+	'inst_ref<range_span>',
 	'',
 	'');
 INSERT INTO S_IRDT
@@ -4116,12 +4116,12 @@ INSERT INTO S_IRDT
 	"db4b4423-bc39-4a7b-9723-4cd9eb7a6d06");
 INSERT INTO O_OBJ_PROXY
 	VALUES ("db4b4423-bc39-4a7b-9723-4cd9eb7a6d06",
-	'range',
+	'range_span',
 	3760,
-	'range',
+	'range_span',
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'./range/range.xtuml');
+	'./range_span/range_span.xtuml');
 INSERT INTO PE_PE
 	VALUES ("3e1431a9-3d78-4e04-a999-254a69a21bdb",
 	1,
@@ -4131,7 +4131,7 @@ INSERT INTO PE_PE
 INSERT INTO S_DT
 	VALUES ("31c3166e-e3d3-4300-a4aa-c9640c78e2e0",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref_set<range>',
+	'inst_ref_set<range_span>',
 	'',
 	'');
 INSERT INTO S_IRDT
