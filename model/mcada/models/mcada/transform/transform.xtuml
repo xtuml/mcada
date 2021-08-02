@@ -124,6 +124,11 @@ root_package = root_package::populate( name:"Root_Object" );
 genfile = genfile::populate( name:"Root_Object", extension:"ads" );
 relate root_package to genfile across R200;
 
+// transform built-in types
+LOG::LogInfo(message:"  Transforming built-in types...");
+::transformBuiltinTypes();
+LOG::LogInfo(message:"  done.");
+
 // transform components into domain packages
 select many c_cs related by root_ep_pkg->PE_PE[R8000]->C_C[R8001];
 select many ref_c_cs related by root_ep_pkg->PE_PE[R8000]->CL_IC[R8001]->C_C[R4201];
@@ -182,7 +187,8 @@ select any adatype from instances of adatype where ( selected.name == s_dt.Name 
 if ( empty adatype )
   // TODO for now, if a type does not exist, create a new one...
   LOG::LogInfo( message:"DID NOT FIND " + s_dt.Name );
-  adatype = adatype::populate( name:s_dt.Name, domain:0, visibility:"private", adaname:"bogusname" );
+  select any domain_package from instances of domain_package;
+  adatype = adatype::populate( name:s_dt.Name, domain_package:domain_package, visibility:"private", adaname:"bogusname" );
 end if;
 select any empty_member from instances of member where false;
 typeref = typeref::populate( name:adatype.name, body:"", domain:0, parent_parameter:0, parent_operation:0, parent_attribute:1, parent_routine:0, parent_member:empty_member );
@@ -236,9 +242,10 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'transformBuiltinTypes',
 	'',
-	'select many s_dts from instances of S_DT;
+	'select any empty_domain_package from instances of domain_package where false;
+select many s_dts from instances of S_DT;
 for each s_dt in s_dts
-  // builtin types have not containing package or component
+  // Builtin types have no containing package or component.
   select one c_c related by s_dt->PE_PE[R8001]->C_C[R8003];
   select one ep_pkg related by s_dt->PE_PE[R8001]->EP_PKG[R8000];
   if ( empty c_c and empty ep_pkg )
@@ -258,7 +265,7 @@ for each s_dt in s_dts
     end if;
     if ( "" != codegen_type )
       LOG::LogInfo( message:"tranforming built-in type with name " + s_dt.Name );
-      adatype = adatype::populate( name:s_dt.Name, domain:0, visibility:"private", adaname:codegen_type );
+      adatype = adatype::populate( name:s_dt.Name, domain_package:empty_domain_package, visibility:"public", adaname:codegen_type );
     end if;
   end if;
 end for;',
@@ -291,7 +298,8 @@ genfile = genfile::populate( name:filename, extension:"ads" );
 relate domain_package to genfile across R200;
 
 
-// TODO transform types
+// transform types for domain component
+::type2adatype( c_c:c_c, domain_package:domain_package );
 
 // transform classes to class packages
 select many inner_ep_pkgs related by c_c->PE_PE[R8003]->EP_PKG[R8001];
@@ -411,6 +419,152 @@ INSERT INTO S_DT_PROXY
 	'../architecture/classes/classes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("d40007e2-7750-4580-933b-eb2c480c2dc6",
+	1,
+	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("2c22453e-23dc-44c1-9dd1-23ee63d41578",
+	"00000000-0000-0000-0000-000000000000",
+	'type2adatype',
+	'',
+	'c_c = param.c_c;
+domain_package = param.domain_package;
+name = ""; visibility = ""; body = "";
+
+// Data types in packages inside the component are considered private.
+select many ep_pkgs related by c_c->PE_PE[R8003]->EP_PKG[R8001];
+select many pkg_s_dts related by ep_pkgs->PE_PE[R8000]->S_DT[R8001];
+select many pkgref_s_dts related by ep_pkgs->EP_PKGREF[R1402.''refers to'']->EP_PKG[R1402.''refers to'']->PE_PE[R8000]->S_DT[R8001];
+private_s_dts = pkg_s_dts + pkgref_s_dts;
+
+// Data types in packages and sub-packages directly off of the system are considered public.
+select many public_s_dts from instances of S_DT where ( false );
+select many ep_pkgs related by c_c->PE_PE[R8001]->EP_PKG[R8000]->S_SYS[R1405]->EP_PKG[R1401] where ( selected.Name != "types" );
+while ( not_empty ep_pkgs )
+  select many pkg_s_dts related by ep_pkgs->PE_PE[R8000]->S_DT[R8001];
+  public_s_dts = public_s_dts | pkg_s_dts;
+  select many ep_pkgs related by ep_pkgs->PE_PE[R8000]->EP_PKG[R8001];
+end while;
+
+// Iterate twice to loop through private and public types.
+i = 0;
+while ( i <= 1 )
+  s_dts = private_s_dts;
+  if ( 1 == i )
+    s_dts = public_s_dts;
+  end if;
+  for each s_dt in s_dts
+    select one s_irdt related by s_dt->S_IRDT[R17];
+    // Do not output type definitions for instance reference data types.
+    if ( empty s_irdt )
+      select one s_udt related by s_dt->S_UDT[R17];
+      select one s_edt related by s_dt->S_EDT[R17];
+      select one s_sdt related by s_dt->S_SDT[R17];
+
+      name = s_dt.Name;
+      visibility = "private";
+      if ( 1 == i )
+        visibility = "public";
+      end if;
+      body = "";
+      
+      if ( not_empty s_udt )
+        // see what type the UDT is based on
+        select one base_s_dt related by s_udt->S_DT[R18];
+      
+        // get body of type
+        if ( s_udt.Definition != "" )
+          // handle case where there is a definition
+          body = s_udt.Definition;
+        else
+          // There is no definition, use the underlying type.  If the underlying type
+          // is MASLtype, treat this as a typeref and do not output it.  Otherwise
+          // output using the underlying type as the definition.
+          if ( (base_s_dt.Name == "MASLtype") or (s_dt.Name == "MASLtype") )
+            continue;
+          elif ( -1 < STRING::indexof( haystack:s_dt.Name, needle:" of " ) ) // blank-o-f-blank
+            continue;
+          else
+            body = base_s_dt.Name;
+          end if;
+        end if;
+        adatype = adatype::populate( name:name, domain_package:domain_package, visibility:visibility, adaname:body );
+        select one s_range related by s_udt->S_RANGE[R57];
+        if ( not_empty s_range )
+          range_span = range_span::populate( type:adatype, minimum:s_range.Min, maximum:s_range.Max );
+        end if;
+      elif ( not_empty s_edt )
+        adatype = adatype::populate( name:name, domain_package:domain_package, visibility:visibility, adaname:body );
+        enumeration = enumeration::populate( adatype:adatype );
+        select any s_enum from instances of S_ENUM where (false);
+        // get to the first entry
+        select any prev_s_enum related by s_edt->S_ENUM[R27];
+        while ( not_empty prev_s_enum )
+          assign s_enum = prev_s_enum;
+          select one prev_s_enum related by s_enum->S_ENUM[R56.''succeeds''];
+        end while;
+        // now iterate over the enumerators
+        while ( not_empty s_enum )
+          enumerator = enumerator::populate( name:s_enum.Name, expression:"", enumeration:enumeration );
+          select one s_enum related by s_enum->S_ENUM[R56.''precedes''];
+        end while;
+      elif ( not_empty s_sdt )
+        adatype = adatype::populate( name:name, domain_package:domain_package, visibility:visibility, adaname:body );
+        structure = structure::populate( adatype:adatype );
+        select any s_mbr from instances of S_MBR where (false);
+        // get to the first entry
+        select any prev_s_mbr related by s_sdt->S_MBR[R44];
+        while ( not_empty prev_s_mbr )
+          assign s_mbr = prev_s_mbr;
+          select one prev_s_mbr related by s_mbr->S_MBR[R46.''succeeds''];
+        end while;
+        // now iterate over the members
+        while ( not_empty s_mbr )
+          member = member::populate( name:s_mbr.Name, expression:"", structure:structure );
+          select one mbr_s_dt related by s_mbr->S_DT[R45];
+          select one ep_pkg related by mbr_s_dt->PE_PE[R8001]->EP_PKG[R8000];
+          // TODO ::type2typeref( s_dt:mbr_s_dt, domain_pkg:ep_pkg );
+          select one s_mbr related by s_mbr->S_MBR[R46.''precedes''];
+        end while;
+      else
+        continue;
+      end if;
+
+      select one ep_pkg related by s_dt->PE_PE[R8001]->EP_PKG[R8000];
+      // TODO ::mark2pragma( markable:"User Data Type", pathkey: ::package_get_path( ep_pkg:ep_pkg, child: s_dt.Name ) );
+
+      // TODO ::Descrip2description( Descrip:s_dt.Descrip );
+    end if;
+  end for;
+  i = i + 1;
+end while;
+',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0,
+	1);
+INSERT INTO S_SPARM
+	VALUES ("2ba2633d-3809-4696-acba-56e90b03029e",
+	"2c22453e-23dc-44c1-9dd1-23ee63d41578",
+	'domain_package',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
+	0,
+	'',
+	"1059db07-0f55-46d5-a807-0b2348cbd88b",
+	'');
+INSERT INTO S_SPARM
+	VALUES ("1059db07-0f55-46d5-a807-0b2348cbd88b",
+	"2c22453e-23dc-44c1-9dd1-23ee63d41578",
+	'c_c',
+	"67f93d18-1045-4c6c-b0d5-a692023c471c",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO PE_PE
+	VALUES ("2c22453e-23dc-44c1-9dd1-23ee63d41578",
 	1,
 	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
 	"00000000-0000-0000-0000-000000000000",

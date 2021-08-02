@@ -37,11 +37,11 @@ INSERT INTO O_TFR
 	'',
 	"10329cb4-41bd-48fb-a552-3adfa2933b5d",
 	0,
-	'type = param.type;
-select one enumeration related by type->enumeration[R3751];
+	'adatype = param.adatype;
+select one enumeration related by adatype->enumeration[R3751];
 if ( empty enumeration )
   create object instance enumeration of enumeration;
-  relate enumeration to type across R3751;
+  relate enumeration to adatype across R3751;
   //unmarkable = unmarkable::populate( name:"enumeration" );
   //relate enumeration to unmarkable across R3788;
 end if;
@@ -54,7 +54,7 @@ return enumeration;',
 INSERT INTO O_TPARM
 	VALUES ("8a573863-5523-454a-9813-f408c91a2f7f",
 	"aa074c51-9aea-4cdb-981e-a132e8e36a3f",
-	'type',
+	'adatype',
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
 	'',

@@ -576,11 +576,6 @@ LOG::LogInfo( message:"Translating..." );
 
 // static analysis tasks
 
-// transform built-in types
-LOG::LogInfo(message:"  Transforming built-in types...");
-::transformBuiltinTypes();
-LOG::LogInfo(message:"  done.");
-
 // translate root package
 LOG::LogInfo(message:"  Translating application package...");
 select any root_package_mark from instances of Mark where (selected.markable_name == "*"

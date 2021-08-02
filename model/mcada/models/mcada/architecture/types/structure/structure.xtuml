@@ -37,9 +37,9 @@ INSERT INTO O_TFR
 	'',
 	"be393d64-5c76-4b9f-81f3-4eba1a090921",
 	0,
-	'type = param.type;
+	'adatype = param.adatype;
 create object instance structure of structure;
-relate structure to type across R3751;
+relate structure to adatype across R3751;
 //unmarkable = unmarkable::populate( name:"structure" );
 //relate structure to unmarkable across R3788;
 return structure;',
@@ -51,7 +51,7 @@ return structure;',
 INSERT INTO O_TPARM
 	VALUES ("628b14ec-00a4-49b5-852b-e15c00e4b63c",
 	"fade36e8-e76b-47ea-a0b0-ab28693b04e7",
-	'type',
+	'adatype',
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
 	'',
