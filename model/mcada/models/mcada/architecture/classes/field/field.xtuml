@@ -15,11 +15,11 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'type_reference = "integer";
-select one adatyperef related by self->adatyperef[R5];
-select one adatype1 related by adatyperef->adatype1[R5];
-type_reference = adatype1.name;
-if ( "" != adatyperef.decoration )
-  type_reference = type_reference + " " + adatyperef.decoration;
+select one typeref related by self->typeref[R5];
+select one adatype related by typeref->adatype[R3762];
+type_reference = adatype.adaname;
+if ( "" != typeref.decoration )
+  type_reference = type_reference + " " + typeref.decoration;
 end if;
 T::include( file:"package/t.field.ada" );',
 	1,

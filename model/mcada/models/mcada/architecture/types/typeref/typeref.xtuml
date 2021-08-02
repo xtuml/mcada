@@ -15,6 +15,7 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'  mybody = self.body;
+  // CDS figure out what to do with instance references
   if ( STRING::indexof( haystack:mybody, needle:"instance of" ) > -1 )
     // WASL uses classname_IH for instance handles.
     mybody = STRING::substr( s:mybody, begin:12, end:STRING::strlen( s:mybody ) );
@@ -43,6 +44,7 @@ INSERT INTO O_TFR
 // Every encounter with a type reference is a new instance.
 create object instance typeref of typeref;
 typeref.body = param.body;
+typeref.decoration = "";
 /* CDS
 if ( "" != param.name )
   select any referred_type related by domain->type[R3719] where ( selected.name == param.name );
@@ -217,6 +219,24 @@ INSERT INTO O_ATTR
 	'',
 	'',
 	'body',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	'decoration',
+	'',
+	'',
+	'decoration',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',

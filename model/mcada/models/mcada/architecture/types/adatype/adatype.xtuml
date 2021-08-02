@@ -58,26 +58,26 @@ INSERT INTO O_TFR
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
 	'domain = param.domain;
-select any adatype from instances of adatype;
-/* CDS
-select any type related by domain->type[R3719] where ( selected.name == param.name );
-if ( empty type )
-  create object instance type of type;
-  type.name = param.name;
-  type.visibility = param.visibility;
-  type.body = param.body; // This holds the string body of the type definition.
-  type.rendered = false;
-  type.declared_forward = false;
-  type.lcount = 0;
+//select any type related by domain->type[R3719] where ( selected.name == param.name );
+select any adatype from instances of adatype where ( selected.name == param.name );
+LOG::LogInfo( message:"in adatype::populate with name and xtuml_name of " + param.name + " and " + param.adaname );
+if ( empty adatype )
+  LOG::LogInfo( message:"in adatype::populate and did not find a matching adatype." );
+  create object instance adatype of adatype;
+  adatype.name = param.name;
+  adatype.visibility = param.visibility;
+  adatype.adaname = param.adaname;
+  adatype.rendered = false;
+  adatype.declared_forward = false;
+  adatype.lcount = 0;
   // Skip the type miner when nothing to mine.
-  if ( "" != type.body )
-    type.lcount = typeminer::referreds( name:type.name, body:type.body, labels:type.labels );
+  if ( "" != adatype.body )
+    // CDS adatype.lcount = typeminer::referreds( name:type.name, body:type.body, labels:type.labels );
   end if;
-  relate type to domain across R3719;
-  markable = markable::populate( name:"type" );
-  relate type to markable across R3783;
+  //relate adatype to domain across R3719;
+  //markable = markable::populate( name:"type" );
+  //relate type to markable across R3783;
 end if;
-*/
 return adatype;',
 	1,
 	'',
@@ -114,7 +114,7 @@ INSERT INTO O_TPARM
 INSERT INTO O_TPARM
 	VALUES ("fb5a11b1-99c8-4224-94d1-f14162c6ea85",
 	"d186f04f-02f7-4922-a4b6-bc82a787c2ab",
-	'body',
+	'adaname',
 	"ba5eda7a-def5-0000-0000-000000000004",
 	0,
 	'',
@@ -500,6 +500,24 @@ INSERT INTO O_ATTR
 	'declared_forward',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("a2ad24e5-c362-4768-82c4-467fbcb27af1",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e");
+INSERT INTO O_BATTR
+	VALUES ("a2ad24e5-c362-4768-82c4-467fbcb27af1",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e");
+INSERT INTO O_ATTR
+	VALUES ("a2ad24e5-c362-4768-82c4-467fbcb27af1",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	"0d062481-25f4-4c42-89ab-5d194b3651a1",
+	'adaname',
+	'',
+	'',
+	'adaname',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
 INSERT INTO O_ID

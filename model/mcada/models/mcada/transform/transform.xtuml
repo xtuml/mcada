@@ -177,13 +177,17 @@ if ( s_dt.Name == "same_as<Base_Attribute>" )
   select one s_dt related by o_attr->O_RATTR[R106]->O_BATTR[R113]->O_ATTR[R106]->S_DT[R114];
 end if;
 
-select any adatype1 from instances of adatype1 where ( selected.xtuml_name == s_dt.Name );
-adatyperef = adatyperef::populate( decoration:"" );
-if ( empty adatype1 )
+LOG::LogInfo( message:"s_dt.Name is " + s_dt.Name );
+select any adatype from instances of adatype where ( selected.name == s_dt.Name );
+if ( empty adatype )
   // TODO for now, if a type does not exist, create a new one...
-  adatype1 = adatype1::populate( name:"integer", xtuml_name:s_dt.Name );
+  LOG::LogInfo( message:"DID NOT FIND " + s_dt.Name );
+  adatype = adatype::populate( name:s_dt.Name, domain:0, visibility:"private", adaname:"bogusname" );
 end if;
-relate field to adatype1 across R5 using adatyperef;',
+select any empty_member from instances of member where false;
+typeref = typeref::populate( name:adatype.name, body:"", domain:0, parent_parameter:0, parent_operation:0, parent_attribute:1, parent_routine:0, parent_member:empty_member );
+relate typeref to adatype across R3762;
+relate field to typeref across R5;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -238,21 +242,23 @@ for each s_dt in s_dts
   select one c_c related by s_dt->PE_PE[R8001]->C_C[R8003];
   select one ep_pkg related by s_dt->PE_PE[R8001]->EP_PKG[R8000];
   if ( empty c_c and empty ep_pkg )
-    type_name = "Application_Types.Base_Integer_Type";
+    codegen_type = "Application_Types.Base_Integer_Type";
     if ( "boolean" == s_dt.Name )
-      type_name = "Application_Types.Base_Boolean_Type";
+      codegen_type = "Application_Types.Base_Boolean_Type";
     elif ( "integer" == s_dt.Name )
-      type_name = "Application_Types.Base_Integer_Type";
+      codegen_type = "Application_Types.Base_Integer_Type";
     elif ( "real" == s_dt.Name )
-      type_name = "Application_Types.Base_Float_Type";
+      codegen_type = "Application_Types.Base_Float_Type";
     elif ( "string" == s_dt.Name )
-      type_name = "Application_Types.Base_String_Type";
+      codegen_type = "Application_Types.Base_String_Type";
+    elif ( "unique_id" == s_dt.Name )
+      codegen_type = "Application_Types.Base_Integer_Type";
     else
       // TODO finish mapping all built-in types to Ada types
     end if;
-    if ( "" != type_name )
-      create object instance adatype1 of adatype1;
-      adatype1 = adatype1::populate( name:type_name, xtuml_name:s_dt.Name );
+    if ( "" != codegen_type )
+      LOG::LogInfo( message:"tranforming built-in type with name " + s_dt.Name );
+      adatype = adatype::populate( name:s_dt.Name, domain:0, visibility:"private", adaname:codegen_type );
     end if;
   end if;
 end for;',
