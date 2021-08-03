@@ -14,21 +14,26 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one class_package related by self->class_package[R200];
-if ( not_empty class_package )
-  class_package.render();
+	'
+select one root_package related by self->root_package[R200];
+if ( not_empty root_package )
+  root_package.render();
 end if;
 select one domain_package related by self->domain_package[R200];
 if ( not_empty domain_package )
   domain_package.render();
 end if;
-select one root_package related by self->root_package[R200];
-if ( not_empty root_package )
-  root_package.render();
+select one domain_types_package related by self->domain_types_package[R200];
+if ( not_empty domain_types_package )
+  domain_types_package.render();
+end if;
+select one class_package related by self->class_package[R200];
+if ( not_empty class_package )
+  class_package.render();
 end if;',
 	1,
 	'',
-	"00000000-0000-0000-0000-000000000000",
+	"3d90c842-7b75-432e-a873-aa742bcf43cb",
 	0,
 	0);
 INSERT INTO O_TFR
@@ -94,7 +99,7 @@ genfile.file_path = genfile::get_full_path(base_dir:genfile.base_dir, name:genfi
 return genfile;',
 	1,
 	'',
-	"6c6754eb-ec83-4c54-84ef-627fe7489227",
+	"00000000-0000-0000-0000-000000000000",
 	0,
 	1);
 INSERT INTO O_TPARM

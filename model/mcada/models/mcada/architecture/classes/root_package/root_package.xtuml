@@ -51,7 +51,7 @@ for each domain_package in domain_packages
   domain_package.render();
 end for;
 
-T::include( file:"package/t.root_package.ads" );
+T::include( file:"package/t.root_package.ada" );
 T::emit( file:self.file_path );
 T::clear();',
 	1,

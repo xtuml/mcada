@@ -21,6 +21,7 @@ for each reference in references
 end for;
 //select one markable related by self->markable[R3783];
 
+T::include( file:"package/t.type_begin.ada" );
 select one enumeration related by self->enumeration[R3751];
 select one structure related by self->structure[R3751];
 if ( not_empty enumeration )
@@ -37,11 +38,11 @@ else
   else
     // WASL does not support unconstrained UDTs.
     if ( "Timer_ID" != self.name ) and ( false )
-      T::include( file:"package/t.type_begin.ada" );
-      T::include( file:"package/t.type_end.ada" );
+      // TODO
     end if;
   end if;
 end if;
+//T::include( file:"package/t.type_end.ada" );
 
 //markable.render_marking( list:"default" );
 ',
@@ -57,10 +58,9 @@ INSERT INTO O_TFR
 	'',
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
-	'domain_package = param.domain_package;
+	'domain_types_package = param.domain_types_package;
 select any root_package from instances of root_package where false;
-select any adatype related by domain_package->adatype[R3719] where ( selected.name == param.name );
-if ( empty adatype )
+if ( empty domain_types_package )
   select any root_package from instances of root_package;
 end if;
 create object instance adatype of adatype;
@@ -79,10 +79,10 @@ adatype.lcount = 0;
 if ( "" != adatype.body )
 	// CDS adatype.lcount = typeminer::referreds( name:type.name, body:type.body, labels:type.labels );
 end if;
-if ( not_empty domain_package )
-	relate adatype to domain_package across R3719;
+if ( not_empty domain_types_package )
+	relate adatype to domain_types_package across R7;
 else
-	// Built-in types are not related to a domain_package.
+	// Built-in types are not related to a domain types package.
 	relate adatype to root_package across R3720;
 end if;
 //markable = markable::populate( name:"type" );
@@ -105,16 +105,16 @@ INSERT INTO O_TPARM
 INSERT INTO O_TPARM
 	VALUES ("4902e012-7835-48ad-842d-0180dea0210d",
 	"d186f04f-02f7-4922-a4b6-bc82a787c2ab",
-	'domain_package',
-	"73535d6a-209c-42ca-8802-bd03f5981206",
+	'domain_types_package',
+	"d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
 	0,
 	'',
 	"757a08c1-6cac-4cda-aa2f-3214e3cbeed2",
 	'');
 INSERT INTO S_DT_PROXY
-	VALUES ("73535d6a-209c-42ca-8802-bd03f5981206",
+	VALUES ("d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<domain_package>',
+	'inst_ref<domain_types_package>',
 	'',
 	'',
 	'../../classes/classes.xtuml');

@@ -56,14 +56,21 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one root_package related by self->root_package[R3];
+	'LOG::LogInfo( message:"Rendering domain package for " + self.name );
+
+select one root_package related by self->root_package[R3];
+
+select one domain_types_package related by self->domain_types_package[R6];
+if ( not_empty domain_types_package )
+  domain_types_package.render();
+end if;
 
 select many class_packages related by self->class_package[R4];
 for each class_package in class_packages
   class_package.render();
 end for;
 
-T::include( file:"package/t.domain_package.ads" );
+T::include( file:"package/t.domain_package.ada" );
 T::emit( file:self.file_path );
 T::clear();',
 	1,
