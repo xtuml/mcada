@@ -38,7 +38,7 @@ else
   else
     // WASL does not support unconstrained UDTs.
     if ( "Timer_ID" != self.name ) and ( false )
-      // TODO
+      //select one typeref related by self->
     end if;
   end if;
 end if;
@@ -206,25 +206,13 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'/* CDS
-i = self.lcount;
-while ( i > 0 )
-  i = i - 1;
-  // Since name is a key, there can be only one type in this domain matching a given label.
-  select any referred_type related by self->domain[R3719]->type[R3719] where ( selected.name == self.labels[ i ] );
-  if ( not_empty referred_type )
-    r = reference::populate( parent:self, child:referred_type );
-  end if;
-end while;
-// Then the WASL way.
-select many typerefs related by self->structure[R3751]->member[R3752.''has'']->typeref[R3753];
+	'select many typerefs related by self->structure[R3751]->member[R3752.''has'']->typeref[R3753];
 for each typeref in typerefs
-  select any referred_type related by self->domain[R3719]->type[R3719] where ( selected.name == typeref.body );
-  if ( not_empty referred_type )
-    r = reference::populate( parent:self, child:referred_type );
+  select any referred_adatype related by self->domain_types_package[R7]->adatype[R7] where ( selected.name == typeref.body );
+  if ( not_empty referred_adatype )
+    r = reference::populate( parent:self, child:referred_adatype );
   end if;
-end for;
-*/',
+end for;',
 	1,
 	'',
 	"d186f04f-02f7-4922-a4b6-bc82a787c2ab",

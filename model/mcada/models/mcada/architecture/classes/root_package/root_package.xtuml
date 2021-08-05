@@ -46,7 +46,13 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select many domain_packages related by self->domain_package[R3];
+	'// Populate missed forward references.
+select many adatypes from instances of adatype;
+for each adatype in adatypes
+  adatype.populate_references();
+end for;
+
+select many domain_packages related by self->domain_package[R3];
 for each domain_package in domain_packages
   domain_package.render();
 end for;

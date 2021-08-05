@@ -14,12 +14,12 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'T::include( file:"package/t.member.ada" );
+	'T::include( file:"package/t.member_begin.ada" );
 select one typeref related by self->typeref[R3753];
 typeref.render();
+T::include( file:"package/t.member_end.ada" );
 select one next_member related by self->member[R3778.''precedes''];
 if ( not_empty next_member )
-  T::include( file:"package/t.field_delimiter.ada" );
   next_member.render();
 end if;',
 	1,

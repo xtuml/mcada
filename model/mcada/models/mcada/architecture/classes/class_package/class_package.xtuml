@@ -18,6 +18,12 @@ INSERT INTO O_TFR
 select one root_package related by domain_package->root_package[R3];
 select many records related by self->record[R1];
 if ( not_empty records )
+  domain_types_package_name = "";
+  select one domain_types_package related by domain_package->domain_types_package[R6];
+  if ( not_empty domain_types_package )
+    // This is needed for inclusion in the class package.
+    domain_types_package_name = domain_types_package.name;
+  end if;
   sep = "";
   for each record in records
     T::append(s:sep);

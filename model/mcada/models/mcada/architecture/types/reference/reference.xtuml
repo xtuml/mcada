@@ -22,10 +22,8 @@ if ( empty reference )
   create object instance reference of reference;
   relate parent to child across R3777.''refers_to'' using reference;
   reference.resolved = false;
-  /* CDS
-  select one domain related by parent->domain[R3719];
-  relate domain to reference across R3776.''contains'';
-  */
+  select one domain_types_package related by parent->domain_types_package[R7];
+  // TODO relate domain_types_package to reference across R3776.''contains'';
 end if;
 return reference;',
 	1,
@@ -45,7 +43,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<type>',
+	'inst_ref<adatype>',
 	'',
 	'',
 	'../types.xtuml');
@@ -78,7 +76,7 @@ INSERT INTO O_REF
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
-	'type',
+	'adatype',
 	'name',
 	'R3777.''refers_to''');
 INSERT INTO R_RGO_PROXY
@@ -103,7 +101,7 @@ INSERT INTO O_RATTR
 INSERT INTO O_BATTR_PROXY
 	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
 	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
-	'../type/type.xtuml');
+	'../adatype/adatype.xtuml');
 INSERT INTO O_ATTR
 	VALUES ("d1504958-ca56-43fa-bd43-4c43340243f7",
 	"5eb2fa38-61f1-4787-9840-8e27ccb2621c",
@@ -129,7 +127,7 @@ INSERT INTO O_REF
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
-	'type',
+	'adatype',
 	'name',
 	'R3777.''is_referenced_by''');
 INSERT INTO O_RTIDA_PROXY

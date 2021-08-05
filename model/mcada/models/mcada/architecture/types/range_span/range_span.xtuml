@@ -14,7 +14,7 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'T::include( file:"package/t.range.ada" );
+	'T::include( file:"package/t.range_span.ada" );
 ',
 	1,
 	'',
@@ -28,14 +28,11 @@ INSERT INTO O_TFR
 	'',
 	"3e1431a9-3d78-4e04-a999-254a69a21bdb",
 	0,
-	'parent_type = param.type;
-/* CDS
-select one domain related by parent_type->domain[R3719];
-constraint = constraint::populate( name:parent_type.body, domain:domain );
-relate constraint to parent_type across R3751;
-*/
+	'parent_adatype = param.adatype;
+constraint = constraint::populate( name:parent_adatype.body );
+relate constraint to parent_adatype across R3751;
 create object instance range_span of range_span;
-//relate range to constraint across R3757;
+relate range_span to constraint across R3757;
 range_span.minimum = param.minimum;
 range_span.maximum = param.maximum;
 return range_span;',
@@ -47,7 +44,7 @@ return range_span;',
 INSERT INTO O_TPARM
 	VALUES ("ce53e2ca-dd87-49b7-bd8f-92dcbd6ecc2c",
 	"a164ea37-07b3-48db-b3c0-0906300c112d",
-	'type',
+	'adatype',
 	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	0,
 	'',
@@ -56,7 +53,7 @@ INSERT INTO O_TPARM
 INSERT INTO S_DT_PROXY
 	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
 	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<type>',
+	'inst_ref<adatype>',
 	'',
 	'',
 	'../types.xtuml');

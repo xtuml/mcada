@@ -182,17 +182,15 @@ if ( s_dt.Name == "same_as<Base_Attribute>" )
   select one s_dt related by o_attr->O_RATTR[R106]->O_BATTR[R113]->O_ATTR[R106]->S_DT[R114];
 end if;
 
+select any domain_types_package from instances of domain_types_package;  // TODO get the right domain package
 select any adatype from instances of adatype where ( selected.name == s_dt.Name );
 if ( empty adatype )
   // TODO for now, if a type does not exist, create a new one...
   // TODO Create a type reference here.
   LOG::LogInfo( message:"DID NOT FIND " + s_dt.Name );
-  select any domain_types_package from instances of domain_types_package;
   adatype = adatype::populate( name:s_dt.Name, domain_types_package:domain_types_package, visibility:"private", adaname:"bogusname" );
 end if;
-select any empty_member from instances of member where false;
-typeref = typeref::populate( name:adatype.name, body:"", domain:0, parent_parameter:0, parent_operation:0, parent_attribute:1, parent_routine:0, parent_member:empty_member );
-relate typeref to adatype across R3762;
+typeref = typeref::populate( name:adatype.name, body:"", domain_types_package:domain_types_package );
 relate field to typeref across R5;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -500,7 +498,7 @@ while ( i <= 1 )
         adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:body );
         select one s_range related by s_udt->S_RANGE[R57];
         if ( not_empty s_range )
-          range_span = range_span::populate( type:adatype, minimum:s_range.Min, maximum:s_range.Max );
+          range_span = range_span::populate( adatype:adatype, minimum:s_range.Min, maximum:s_range.Max );
         end if;
       elif ( not_empty s_edt )
         adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:body );
@@ -532,7 +530,8 @@ while ( i <= 1 )
           member = member::populate( name:s_mbr.Name, expression:"", structure:structure );
           select one mbr_s_dt related by s_mbr->S_DT[R45];
           select one ep_pkg related by mbr_s_dt->PE_PE[R8001]->EP_PKG[R8000];
-          // TODO ::type2typeref( s_dt:mbr_s_dt, domain_pkg:ep_pkg );
+          typeref = typeref::populate( name:mbr_s_dt.Name, body:"", domain_types_package:domain_types_package );
+          relate typeref to member across R3753;
           select one s_mbr related by s_mbr->S_MBR[R46.''precedes''];
         end while;
       else

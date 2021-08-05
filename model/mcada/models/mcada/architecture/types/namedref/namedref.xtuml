@@ -31,21 +31,10 @@ INSERT INTO O_TFR
 	0,
 	'domain = param.domain;
 create object instance namedref of namedref;
-/* CDS
-relate namedref to domain across R3768;
-select any empty_parent_parameter from instances of parameter where ( false );
-select any empty_parent_operation from instances of operation where ( false );
-select any empty_parent_attribute from instances of attribute where ( false );
-select any empty_parent_routine from instances of routine where ( false );
-select any empty_parent_member from instances of member where ( false );
-typeref = typeref::populate( name:param.name, body:param.name, domain:domain,
-                   parent_parameter:empty_parent_parameter,
-                   parent_operation:empty_parent_operation,
-                   parent_attribute:empty_parent_attribute,
-                   parent_routine:empty_parent_routine,
-                   parent_member:empty_parent_member );
+//relate namedref to domain across R3768;
+select any domain_types_package from instances of domain_types_package;  // TODO
+typeref = typeref::populate( name:param.name, body:param.name, domain_types_package:domain_types_package );
 relate namedref to typeref across R3763;
-*/
 return namedref;',
 	1,
 	'',

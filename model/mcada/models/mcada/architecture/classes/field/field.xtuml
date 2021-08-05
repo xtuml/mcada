@@ -14,14 +14,10 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'type_reference = "integer";
-select one typeref related by self->typeref[R5];
-select one adatype related by typeref->adatype[R3762];
-type_reference = adatype.adaname;
-if ( "" != typeref.decoration )
-  type_reference = type_reference + " " + typeref.decoration;
-end if;
-T::include( file:"package/t.field.ada" );',
+	'select one typeref related by self->typeref[R5];
+T::include( file:"package/t.field_begin.ada" );
+typeref.render();
+T::include( file:"package/t.field_end.ada" );',
 	1,
 	'',
 	"4d8f19c1-99e3-49bf-a3ae-7b84dc6cb211",

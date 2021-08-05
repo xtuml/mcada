@@ -1,1 +1,1 @@
-${mybody}\
+${package_scope}${self.body}\
