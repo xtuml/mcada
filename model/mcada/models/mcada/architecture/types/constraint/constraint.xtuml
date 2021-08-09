@@ -33,7 +33,8 @@ INSERT INTO O_TFR
 	'',
 	"29436fee-319a-4126-8e0b-1a9188e95a7a",
 	0,
-	'create object instance constraint of constraint;
+	'mcada::trace( id:103, flavor:"info", message:"constraint::populate " + param.name );
+create object instance constraint of constraint;
 namedref = namedref::populate( name:param.name, domain:0 );
 relate namedref to constraint across R3774;
 return constraint;',
@@ -68,7 +69,7 @@ INSERT INTO O_TFR
 	'valid = true;
 select many templates from instances of template;
 if ( empty templates )
-  TRACE::log( flavor:"failure", id:5, message:"There are no templates." );
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
   valid = false;
 end if;
 

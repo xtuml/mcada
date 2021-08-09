@@ -154,21 +154,21 @@ INSERT INTO O_TFR
 
 // validate name
 if ( "" == self.name )
-  TRACE::log( flavor:"failure", id:101, message:"type has no name." );
+  mcada::trace( flavor:"failure", id:101, message:"type has no name." );
   valid = false;
   return valid;		// short circuit
 end if;
 
 // validate visibility
 if ( "public" != self.visibility and "private" != self.visibility )
-  TRACE::log( flavor:"failure", id:101, message:"invalid visibility for routine: " + self.visibility );
+  mcada::trace( flavor:"failure", id:101, message:"invalid visibility for routine: " + self.visibility );
   valid = false;
   return valid;		// short circuit
 end if;
 
 // validate body
 if ( "" == self.body )
-  TRACE::log( flavor:"failure", id:101, message:"type has no body." );
+  mcada::trace( flavor:"failure", id:101, message:"type has no body." );
   valid = false;
   return valid;		// short circuit
 end if;
@@ -349,11 +349,11 @@ while ( 0 < adatype::render_leaves( domain:domain, scope:param.scope ) )
       adatype.render_forward();
     end if;
   else
-    TRACE::log( flavor:"failure", id:121, message:"did not find cyclic unresolved type" );
+    mcada::trace( flavor:"failure", id:121, message:"did not find cyclic unresolved type" );
   end if;
   guard = guard - 1;
   if ( 0 == guard )
-    TRACE::log( flavor:"failure", id:122, message:"did not break cycles" );
+    mcada::trace( flavor:"failure", id:122, message:"did not break cycles" );
     break;
   end if;
 end while;',

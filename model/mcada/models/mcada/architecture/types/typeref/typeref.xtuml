@@ -32,7 +32,8 @@ INSERT INTO O_TFR
 	'',
 	"dbc69853-53b0-452c-b532-4557c97519fa",
 	0,
-	'domain_types_package = param.domain_types_package;
+	'mcada::trace( id:106, flavor:"info", message:"typeref::populate " + param.name + " " + param.body );
+domain_types_package = param.domain_types_package;
 // A type reference will never already exist.
 // Every encounter with a type reference is a new instance.
 create object instance typeref of typeref;
@@ -104,7 +105,7 @@ INSERT INTO O_TFR
 
 // validate body
 if ( "" == self.body )
-  TRACE::log( flavor:"failure", id:101, message:"typeref has no body." );
+  mcada::trace( flavor:"failure", id:101, message:"typeref has no body." );
   valid = false;
   return valid;		// short circuit
 end if;

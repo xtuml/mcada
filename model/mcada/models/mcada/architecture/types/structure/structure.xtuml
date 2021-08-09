@@ -38,6 +38,7 @@ INSERT INTO O_TFR
 	"be393d64-5c76-4b9f-81f3-4eba1a090921",
 	0,
 	'adatype = param.adatype;
+mcada::trace( id:104, flavor:"info", message:"structure::populate " + adatype.name );
 create object instance structure of structure;
 relate structure to adatype across R3751;
 //unmarkable = unmarkable::populate( name:"structure" );
@@ -81,7 +82,7 @@ INSERT INTO O_TFR
 	'valid = true;
 select many templates from instances of template;
 if ( empty templates )
-  TRACE::log( flavor:"failure", id:5, message:"There are no templates." );
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
   valid = false;
 end if;
 

@@ -112,7 +112,7 @@ select many domain_types_packages from instances of domain_types_package;
 for each domain_types_package in domain_types_packages
   select one domain_package related by domain_types_package->domain_package[R6];
   if ( empty domain_package )
-    TRACE::log( flavor:"failure", id:5, message:"domain_types_packages exists without domain_package" );
+    mcada::trace( flavor:"failure", id:5, message:"domain_types_packages exists without domain_package" );
     valid = false;
   end if;
 end for;

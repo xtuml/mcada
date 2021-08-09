@@ -79,6 +79,47 @@ INSERT INTO O_TPARM
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	'');
+INSERT INTO O_TFR
+	VALUES ("c7263d91-1804-4b6b-a9ba-2dfc93e62823",
+	"5e7f3e5d-aac5-4aef-98fc-585d89347c23",
+	'trace',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	's = STRING::itoa( i:param.id ) + " ___ " + param.flavor + " ___ " + param.message;
+LOG::LogInfo( message:s );',
+	1,
+	'',
+	"5fa2e50d-3eb6-44ab-9ebb-6f58f7f084bf",
+	0,
+	1);
+INSERT INTO O_TPARM
+	VALUES ("3e2e2412-3b7d-49d2-a04a-0202026a76c4",
+	"c7263d91-1804-4b6b-a9ba-2dfc93e62823",
+	'id',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("0cfd9f4b-e72f-4869-affc-a41f6963adb9",
+	"c7263d91-1804-4b6b-a9ba-2dfc93e62823",
+	'flavor',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"3e2e2412-3b7d-49d2-a04a-0202026a76c4",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("ddad4e65-1f89-412f-ab40-68f92527871e",
+	"c7263d91-1804-4b6b-a9ba-2dfc93e62823",
+	'message',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"0cfd9f4b-e72f-4869-affc-a41f6963adb9",
+	'');
 INSERT INTO O_NBATTR
 	VALUES ("515a6959-25a3-4c7a-8015-1333132b6834",
 	"5e7f3e5d-aac5-4aef-98fc-585d89347c23");
