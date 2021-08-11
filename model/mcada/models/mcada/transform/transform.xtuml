@@ -228,6 +228,12 @@ for each o_obj in o_objs
   ::class2class_package( o_obj:o_obj, domain_package:domain_package );
 end for;
 
+// transform associations to relationship packages
+select many r_rels related by inner_ep_pkgs->PE_PE[R8000]->R_REL[R8001];
+for each r_rel in r_rels
+  ::association2relationship_package( domain_package:domain_package, r_rel:r_rel );
+end for;
+
 // TODO transform functions
 // TODO transform scenarios',
 	"ba5eda7a-def5-0000-0000-000000000000",
@@ -498,6 +504,51 @@ INSERT INTO S_SPARM
 	'');
 INSERT INTO PE_PE
 	VALUES ("2c22453e-23dc-44c1-9dd1-23ee63d41578",
+	1,
+	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("44b793b5-9c83-4cd6-8661-1a3ae5c4a998",
+	"00000000-0000-0000-0000-000000000000",
+	'association2relationship_package',
+	'',
+	'r_rel = param.r_rel;
+domain_package = param.domain_package;
+relationship_package = relationship_package::populate( domain_package:domain_package, number:r_rel.Numb );
+relate relationship_package to domain_package across R8;',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0,
+	2);
+INSERT INTO S_SPARM
+	VALUES ("fa49db7b-a66b-4801-8d50-ed76ec7052f5",
+	"44b793b5-9c83-4cd6-8661-1a3ae5c4a998",
+	'domain_package',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_SPARM
+	VALUES ("abf21f52-c07f-4a0e-a302-958c200d353c",
+	"44b793b5-9c83-4cd6-8661-1a3ae5c4a998",
+	'r_rel',
+	"4480b008-8c74-4f57-9256-08b7365520bc",
+	0,
+	'',
+	"fa49db7b-a66b-4801-8d50-ed76ec7052f5",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("4480b008-8c74-4f57-9256-08b7365520bc",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<Association>',
+	'',
+	'',
+	'../../../../mcooa/models/mcooa/ooaofooa/Association/Association.xtuml');
+INSERT INTO PE_PE
+	VALUES ("44b793b5-9c83-4cd6-8661-1a3ae5c4a998",
 	1,
 	"195e9f6c-7ef4-4e85-8442-a2dcbf6639d2",
 	"00000000-0000-0000-0000-000000000000",

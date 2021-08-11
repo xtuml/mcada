@@ -1,0 +1,192 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("495e972e-d4e3-412e-8178-6531c73caa3b",
+	'relationship_package',
+	106,
+	'relationship_package',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("0c5c2821-3f12-4e70-868f-e6b72ab4e88f",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'//',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	1);
+INSERT INTO O_TFR
+	VALUES ("5607e023-7408-4319-b77e-2a8cadd1fa49",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	'populate',
+	'',
+	"dd14fa7a-ca67-48cb-983f-db8c386f6c9a",
+	0,
+	'domain_package = param.domain_package;
+create object instance relationship_package of relationship_package;
+relationship_package.number = param.number;
+relationship_package.name = domain_package.name + "_Rel_R" + STRING::itoa( i:relationship_package.number );
+
+// relationshp package is in a file
+filename = T::sub( format:"lr", s:relationship_package.name );
+genfile = genfile::populate( name:filename, extension:"ads" );
+relate relationship_package to genfile across R200;
+
+return relationship_package;',
+	1,
+	'',
+	"0c5c2821-3f12-4e70-868f-e6b72ab4e88f",
+	0,
+	2);
+INSERT INTO O_TPARM
+	VALUES ("8d88f6e8-319a-4ae3-a4c9-a78d68704369",
+	"5607e023-7408-4319-b77e-2a8cadd1fa49",
+	'domain_package',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("73535d6a-209c-42ca-8802-bd03f5981206",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<domain_package>',
+	'',
+	'',
+	'../classes.xtuml');
+INSERT INTO O_TPARM
+	VALUES ("09cd5559-1f62-4335-a762-f058de49e4e6",
+	"5607e023-7408-4319-b77e-2a8cadd1fa49",
+	'number',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"8d88f6e8-319a-4ae3-a4c9-a78d68704369",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("dd14fa7a-ca67-48cb-983f-db8c386f6c9a",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<relationship_package>',
+	'',
+	'',
+	'../classes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("3ace9583-aa40-4f6c-b466-11685927763c",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_BATTR
+	VALUES ("3ace9583-aa40-4f6c-b466-11685927763c",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_ATTR
+	VALUES ("3ace9583-aa40-4f6c-b466-11685927763c",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("c111ec2b-38c6-45c1-87a2-a7141a2f36b2",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_BATTR
+	VALUES ("c111ec2b-38c6-45c1-87a2-a7141a2f36b2",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_ATTR
+	VALUES ("c111ec2b-38c6-45c1-87a2-a7141a2f36b2",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	"3ace9583-aa40-4f6c-b466-11685927763c",
+	'number',
+	'',
+	'',
+	'number',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_REF
+	VALUES ("495e972e-d4e3-412e-8178-6531c73caa3b",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"680c51aa-7310-448a-859e-2db8ac3e9400",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	"f20a060a-187a-4db8-addf-89e3af53c961",
+	"edf6b1f6-9293-4175-88ce-0cb0c0a7779e",
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'genfile',
+	'file_path',
+	'R200');
+INSERT INTO R_RGO_PROXY
+	VALUES ("495e972e-d4e3-412e-8178-6531c73caa3b",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"680c51aa-7310-448a-859e-2db8ac3e9400",
+	'../../file/file.xtuml');
+INSERT INTO O_RTIDA_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	'../../file/file.xtuml');
+INSERT INTO O_RATTR
+	VALUES ("f20a060a-187a-4db8-addf-89e3af53c961",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	1,
+	'file_path');
+INSERT INTO O_BATTR_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'../../file/genfile/genfile.xtuml');
+INSERT INTO O_ATTR
+	VALUES ("f20a060a-187a-4db8-addf-89e3af53c961",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	"c111ec2b-38c6-45c1-87a2-a7141a2f36b2",
+	'file_path',
+	'',
+	'',
+	'file_path',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_OIDA
+	VALUES ("f20a060a-187a-4db8-addf-89e3af53c961",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	0,
+	'file_path');
+INSERT INTO O_ID
+	VALUES (1,
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_ID
+	VALUES (2,
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO PE_PE
+	VALUES ("495e972e-d4e3-412e-8178-6531c73caa3b",
+	1,
+	"48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'classes',
+	'',
+	0,
+	'../classes.xtuml');
