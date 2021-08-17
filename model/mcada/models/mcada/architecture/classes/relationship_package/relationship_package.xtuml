@@ -14,7 +14,12 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'//',
+	'mcada::trace( id:112, flavor:"info", message:"Rendering relationship package for " + self.name );
+
+T::include( file:"package/t.relationship_package.ada" );
+T::emit( file:self.file_path );
+T::clear();
+',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -31,6 +36,7 @@ INSERT INTO O_TFR
 create object instance relationship_package of relationship_package;
 relationship_package.number = param.number;
 relationship_package.name = domain_package.name + "_Rel_R" + STRING::itoa( i:relationship_package.number );
+relationship_package.flavor = param.flavor;
 
 // relationshp package is in a file
 filename = T::sub( format:"lr", s:relationship_package.name );
@@ -67,6 +73,15 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"8d88f6e8-319a-4ae3-a4c9-a78d68704369",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("fc12723b-71ec-48a6-b2aa-e9db5f512f6f",
+	"5607e023-7408-4319-b77e-2a8cadd1fa49",
+	'flavor',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"09cd5559-1f62-4335-a762-f058de49e4e6",
 	'');
 INSERT INTO S_DT_PROXY
 	VALUES ("dd14fa7a-ca67-48cb-983f-db8c386f6c9a",
@@ -160,6 +175,24 @@ INSERT INTO O_ATTR
 	'file_path',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("51fd995c-f5ca-4cbc-a802-7a6f5fe169e4",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_BATTR
+	VALUES ("51fd995c-f5ca-4cbc-a802-7a6f5fe169e4",
+	"495e972e-d4e3-412e-8178-6531c73caa3b");
+INSERT INTO O_ATTR
+	VALUES ("51fd995c-f5ca-4cbc-a802-7a6f5fe169e4",
+	"495e972e-d4e3-412e-8178-6531c73caa3b",
+	"f20a060a-187a-4db8-addf-89e3af53c961",
+	'flavor',
+	'',
+	'',
+	'flavor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
 INSERT INTO O_ID

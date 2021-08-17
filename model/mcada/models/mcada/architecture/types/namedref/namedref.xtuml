@@ -35,7 +35,7 @@ domain = param.domain;
 create object instance namedref of namedref;
 //relate namedref to domain across R3768;
 select any domain_types_package from instances of domain_types_package;  // TODO
-typeref = typeref::populate( name:param.name, body:param.name, domain_types_package:domain_types_package );
+typeref = typeref::populate( name:param.name, body:"", domain_types_package:domain_types_package );
 relate namedref to typeref across R3763;
 return namedref;',
 	1,

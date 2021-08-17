@@ -37,15 +37,14 @@ domain_types_package = param.domain_types_package;
 // A type reference will never already exist.
 // Every encounter with a type reference is a new instance.
 create object instance typeref of typeref;
-typeref.body = param.name;
+typeref.name = param.name;
+typeref.body = param.body;
 typeref.decoration = "";
-if ( "" != param.name )
-  select any referred_adatype related by domain_types_package->adatype[R7] where ( selected.name == param.name );
-  if ( not_empty referred_adatype )
-    relate typeref to referred_adatype across R3762.''refers to'';
-  else
-    // This happens when a structure member makes a forward reference.  It is normal.
-  end if;
+select any referred_adatype related by domain_types_package->adatype[R7] where ( selected.name == param.name );
+if ( not_empty referred_adatype )
+	relate typeref to referred_adatype across R3762.''refers to'';
+else
+	// This happens when a structure member makes a forward reference.  It is normal.
 end if;
 return typeref;',
 	1,
@@ -143,7 +142,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
 	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
-	"00000000-0000-0000-0000-000000000000",
+	"e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
 	'body',
 	'',
 	'',
@@ -166,6 +165,24 @@ INSERT INTO O_ATTR
 	'',
 	'',
 	'decoration',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',

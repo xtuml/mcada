@@ -112,7 +112,7 @@ if ( empty adatype )
   LOG::LogInfo( message:"DID NOT FIND " + s_dt.Name );
   adatype = adatype::populate( name:s_dt.Name, domain_types_package:domain_types_package, visibility:"private", adaname:"bogusname" );
 end if;
-typeref = typeref::populate( name:adatype.name, body:"", domain_types_package:domain_types_package );
+typeref = typeref::populate( name:adatype.name, body:adatype.adaname, domain_types_package:domain_types_package );
 relate field to typeref across R5;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -356,7 +356,7 @@ INSERT INTO S_SYNC
 	'',
 	'c_c = param.c_c;
 domain_package = param.domain_package;
-name = ""; visibility = ""; body = "";
+name = ""; visibility = "";
 
 // Data types in packages inside the component are considered private.
 select many ep_pkgs related by c_c->PE_PE[R8003]->EP_PKG[R8001];
@@ -376,7 +376,7 @@ end while;
 select any domain_types_package from instances of domain_types_package where false;
 if ( ( not_empty private_s_dts ) or ( not_empty public_s_dts ) )
   // Provide a package to contain domain types.
-  LOG::LogInfo( message:"Creating domain types package for domain " + c_c.Name );
+  mcada::trace( id:122, flavor:"info", message:"Creating domain types package for domain " + c_c.Name );
   domain_types_package = domain_types_package::populate( name:c_c.Name, domain_package:domain_package );
 end if;
 
@@ -401,39 +401,22 @@ while ( i <= 1 )
       if ( 1 == i )
         visibility = "public";
       end if;
-      body = "";
       
       if ( not_empty s_udt )
         // see what type the UDT is based on
         select one base_s_dt related by s_udt->S_DT[R18];
-      
-        // get body of type
-        if ( s_udt.Definition != "" )
-          // handle case where there is a definition
-          body = s_udt.Definition;
-        else
-          // There is no definition, use the underlying type.  If the underlying type
-          // is MASLtype, treat this as a typeref and do not output it.  Otherwise
-          // output using the underlying type as the definition.
-          if ( (base_s_dt.Name == "MASLtype") or (s_dt.Name == "MASLtype") )
-            continue;
-          elif ( -1 < STRING::indexof( haystack:s_dt.Name, needle:" of " ) ) // blank-o-f-blank
-            continue;
-          else
-            body = base_s_dt.Name;
-          end if;
-        end if;
-        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:body );
+        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:name );
         select one s_range related by s_udt->S_RANGE[R57];
         if ( not_empty s_range )
-          select any parent_adatype from instances of adatype where ( selected.name == body );
-          constraint = constraint::populate( name:parent_adatype.name );
+          constraint = constraint::populate( name:base_s_dt.Name );
           relate constraint to adatype across R3751;
           range_span = range_span::populate( adatype:adatype, minimum:s_range.Min, maximum:s_range.Max );
           relate range_span to constraint across R3757;
+        else
+          mcada::trace( id:125, flavor:"failure", message:"type2adatype:  found unconstrained UDT:  " + name );
         end if;
       elif ( not_empty s_edt )
-        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:body );
+        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:name );
         enumeration = enumeration::populate( adatype:adatype );
         select any s_enum from instances of S_ENUM where (false);
         // get to the first entry
@@ -448,7 +431,7 @@ while ( i <= 1 )
           select one s_enum related by s_enum->S_ENUM[R56.''precedes''];
         end while;
       elif ( not_empty s_sdt )
-        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:body );
+        adatype = adatype::populate( name:name, domain_types_package:domain_types_package, visibility:visibility, adaname:name );
         structure = structure::populate( adatype:adatype );
         select any s_mbr from instances of S_MBR where (false);
         // get to the first entry
@@ -461,7 +444,7 @@ while ( i <= 1 )
         while ( not_empty s_mbr )
           member = member::populate( name:s_mbr.Name, expression:"", structure:structure );
           select one mbr_s_dt related by s_mbr->S_DT[R45];
-          select one ep_pkg related by mbr_s_dt->PE_PE[R8001]->EP_PKG[R8000];
+          // Create a type reference but leave the body empty, because we may have a forward reference.
           typeref = typeref::populate( name:mbr_s_dt.Name, body:"", domain_types_package:domain_types_package );
           relate typeref to member across R3753;
           select one s_mbr related by s_mbr->S_MBR[R46.''precedes''];
@@ -469,16 +452,37 @@ while ( i <= 1 )
       else
         continue;
       end if;
-
-      select one ep_pkg related by s_dt->PE_PE[R8001]->EP_PKG[R8000];
       // TODO ::mark2pragma( markable:"User Data Type", pathkey: ::package_get_path( ep_pkg:ep_pkg, child: s_dt.Name ) );
-
       // TODO ::Descrip2description( Descrip:s_dt.Descrip );
     end if;
   end for;
   i = i + 1;
 end while;
-',
+
+// Stitch up forward referenced type references.
+select many typerefs from instances of typeref where ( selected.body == "" );
+for each typeref in typerefs
+  select one adatype related by typeref->adatype[R3762];
+  if ( empty adatype )
+    select any adatype related by domain_package->domain_types_package[R6]->adatype[R7] where ( selected.name == typeref.name );
+	  if ( empty adatype )
+      select any adatype from instances of adatype where ( selected.name == typeref.name );
+      if ( empty adatype )
+        mcada::trace( id:123, flavor:"failure", message:"type2adatype:  failed to find type:  " + typeref.name );
+      end if;
+    end if;
+    if ( not_empty adatype )
+      typeref.body = adatype.adaname;
+      relate typeref to adatype across R3762;
+    end if;
+  else
+    typeref.body = adatype.adaname;
+  end if;
+end for;
+select many typerefs from instances of typeref;
+for each typeref in typerefs
+  mcada::trace( id:123, flavor:"INFO", message:"type2adatype:  typeref:  " + typeref.name + " " + typeref.body );
+end for;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
@@ -515,7 +519,46 @@ INSERT INTO S_SYNC
 	'',
 	'r_rel = param.r_rel;
 domain_package = param.domain_package;
-relationship_package = relationship_package::populate( domain_package:domain_package, number:r_rel.Numb );
+
+// Determine the flavor of the association.
+flavor = "";
+side_mult[1] = -1; side_mult[0] = -1; i = 0;
+select one r_simp related by r_rel->R_SIMP[R206];
+select one r_assoc related by r_rel->R_ASSOC[R206];
+select one r_subsup related by r_rel->R_SUBSUP[R206];
+if ( not_empty r_simp )
+  select many r_parts related by r_simp->R_PART[R207];
+  for each r_part in r_parts
+    side_mult[i] = r_part.Mult;
+    i = i + 1;
+  end for;
+  select one r_form related by r_simp->R_FORM[R208];
+  if ( not_empty r_form )
+    side_mult[i] = r_form.Mult;
+  end if;
+elif ( not_empty r_assoc )
+  flavor = "_Associative";
+  select one r_aone related by r_assoc->R_AONE[R209];
+  side_mult[0] = r_aone.Mult;
+  select one r_aoth related by r_assoc->R_AOTH[R210];
+  side_mult[1] = r_aoth.Mult;
+elif ( not_empty r_subsup )
+  flavor = "Super_Sub";
+else
+  mcada::trace( id:121, flavor:"failure", message:"association2relationship - no subtype of R_REL" );
+end if;
+
+if ( "Super_Sub" != flavor )
+  if ( ( side_mult[0] == 0 ) and ( side_mult[1] == 0 ) )
+    flavor = "One_To_One" + flavor;
+  elif ( ( side_mult[0] == 1 ) and ( side_mult[1] == 1 ) )
+    flavor = "Many_To_Many" + flavor;
+  else
+    flavor = "One_To_Many" + flavor;
+  end if;
+end if;
+
+relationship_package = relationship_package::populate( domain_package:domain_package, number:r_rel.Numb, flavor:flavor );
 relate relationship_package to domain_package across R8;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,

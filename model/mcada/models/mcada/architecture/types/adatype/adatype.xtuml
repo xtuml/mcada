@@ -65,20 +65,11 @@ if ( empty domain_types_package )
 end if;
 create object instance adatype of adatype;
 adatype.name = param.name;
+adatype.adaname = param.adaname;
 adatype.visibility = param.visibility;
-if ( "" == param.adaname )
-  // For user defined types, the Ada type name will be the same as the xtuml name.
-  adatype.adaname = param.name;
-else
-  adatype.adaname = param.adaname;
-end if;
 adatype.rendered = false;
 adatype.declared_forward = false;
 adatype.lcount = 0;
-// Skip the type miner when nothing to mine.
-if ( "" != adatype.body )
-	// CDS adatype.lcount = typeminer::referreds( name:type.name, body:type.body, labels:type.labels );
-end if;
 if ( not_empty domain_types_package )
 	relate adatype to domain_types_package across R7;
 else

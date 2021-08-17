@@ -14,14 +14,15 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'T::push_buffer();
+	'//T::push_buffer();
+T::include(file:"package/t.record_begin.ada");
 select many fields related by self->field[R2];
 for each field in fields
   field.render();
 end for;
-field_body = T::body();
-T::pop_buffer();
-T::include(file:"package/t.record.ada");',
+//field_body = T::body();
+//T::pop_buffer();
+T::include(file:"package/t.record_end.ada");',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",

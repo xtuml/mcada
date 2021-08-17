@@ -1,1 +1,1 @@
- ${self.minimum} .. ${self.maximum};
+ range ${self.minimum} .. ${self.maximum};

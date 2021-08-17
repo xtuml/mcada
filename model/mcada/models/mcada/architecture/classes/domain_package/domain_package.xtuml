@@ -70,6 +70,11 @@ for each class_package in class_packages
   class_package.render();
 end for;
 
+select many relationship_packages related by self->relationship_package[R8];
+for each relationship_package in relationship_packages
+  relationship_package.render();
+end for;
+
 T::include( file:"package/t.domain_package.ada" );
 T::emit( file:self.file_path );
 T::clear();',
