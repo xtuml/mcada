@@ -1,1 +1,1 @@
-    end structure;
+    end record;

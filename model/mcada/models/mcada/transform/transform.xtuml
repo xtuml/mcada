@@ -177,7 +177,7 @@ for each s_dt in s_dts
     elif ( "real" == s_dt.Name )
       codegen_type = "Application_Types.Base_Float_Type";
     elif ( "string" == s_dt.Name )
-      codegen_type = "Application_Types.Base_String_Type";
+      codegen_type = "Application_Types.Base_Text_Type";
     elif ( "unique_id" == s_dt.Name )
       codegen_type = "Application_Types.Base_Integer_Type";
     else
@@ -478,10 +478,6 @@ for each typeref in typerefs
   else
     typeref.body = adatype.adaname;
   end if;
-end for;
-select many typerefs from instances of typeref;
-for each typeref in typerefs
-  mcada::trace( id:123, flavor:"INFO", message:"type2adatype:  typeref:  " + typeref.name + " " + typeref.body );
 end for;',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
