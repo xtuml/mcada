@@ -14,20 +14,46 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'type_reference = "Integer";
-/* CDS
-select one type_ref related by self->TypeReference[R3901];
-type_reference = type_ref.type_name;
-if ("" != type_ref.type_decorations)
-  type_reference = type_reference + " " + type_ref.type_decorations;
-end if;
-*/
-T::include(file:"package/t.field.ada");',
+	'select one typeref related by self->typeref[R5];
+T::include( file:"package/t.field_begin.ada" );
+typeref.render();
+T::include( file:"package/t.field_end.ada" );',
+	1,
+	'',
+	"4d8f19c1-99e3-49bf-a3ae-7b84dc6cb211",
+	0,
+	1);
+INSERT INTO O_TFR
+	VALUES ("4d8f19c1-99e3-49bf-a3ae-7b84dc6cb211",
+	"7a2f6b1b-49eb-4eae-bc7c-7c3a76e4604b",
+	'populate',
+	'',
+	"66cfb405-ab53-437a-b24c-e1f20c1e97e6",
+	0,
+	'create object instance field of field;
+field.name = param.name;
+return field;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	0,
-	1);
+	2);
+INSERT INTO O_TPARM
+	VALUES ("650aeb9d-2087-458c-87bf-f71f9e3a5b50",
+	"4d8f19c1-99e3-49bf-a3ae-7b84dc6cb211",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("66cfb405-ab53-437a-b24c-e1f20c1e97e6",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<field>',
+	'',
+	'',
+	'../classes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("876e6c1c-b743-42b7-a0e3-5f0a7e8a1959",
 	"7a2f6b1b-49eb-4eae-bc7c-7c3a76e4604b");

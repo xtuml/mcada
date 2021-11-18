@@ -1,0 +1,212 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'typeref',
+	3752,
+	'typeref',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("aefee7ed-367b-4eff-90c0-103467badc2e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'package_scope = "";
+select one domain_types_package related by self->adatype[R3762]->domain_types_package[R7];
+if ( not_empty domain_types_package )
+  package_scope = domain_types_package.name + ".";
+end if;
+T::include( file:"package/t.typeref.ada" );',
+	1,
+	'',
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("d0c00362-acc8-4a44-9bfe-87852a0796df",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'populate',
+	'',
+	"dbc69853-53b0-452c-b532-4557c97519fa",
+	0,
+	'mcada::trace( id:106, flavor:"info", message:"typeref::populate " + param.name + " " + param.body );
+domain_types_package = param.domain_types_package;
+// A type reference will never already exist.
+// Every encounter with a type reference is a new instance.
+create object instance typeref of typeref;
+typeref.name = param.name;
+typeref.body = param.body;
+typeref.decoration = "";
+select any referred_adatype related by domain_types_package->adatype[R7] where ( selected.name == param.name );
+if ( not_empty referred_adatype )
+	relate typeref to referred_adatype across R3762.''refers to'';
+else
+	// This happens when a structure member makes a forward reference.  It is normal.
+end if;
+return typeref;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("7ebfe48d-4d07-4347-9827-f50f92cdd488",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("f78da368-80ef-4c44-bc82-a731aa72e1c3",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'domain_types_package',
+	"d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
+	0,
+	'',
+	"d09bd35e-5cf9-4ffb-85f4-71fc96a3d12a",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<domain_types_package>',
+	'',
+	'',
+	'../../classes/classes.xtuml');
+INSERT INTO O_TPARM
+	VALUES ("d09bd35e-5cf9-4ffb-85f4-71fc96a3d12a",
+	"d0c00362-acc8-4a44-9bfe-87852a0796df",
+	'body',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"7ebfe48d-4d07-4347-9827-f50f92cdd488",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("dbc69853-53b0-452c-b532-4557c97519fa",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<typeref>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("da937746-cbc0-4bb4-9687-3868c1f18ce5",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	1,
+	'valid = true;
+
+// validate body
+if ( "" == self.body )
+  mcada::trace( flavor:"failure", id:101, message:"typeref has no body." );
+  valid = false;
+  return valid;		// short circuit
+end if;
+
+return valid;',
+	1,
+	'',
+	"3984449f-3d31-4078-a5b0-327237bc15be",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("3984449f-3d31-4078-a5b0-327237bc15be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[7] = "";
+emptyvalue[7] = ""; emptyvalue[6] = ""; emptyvalue[5] = ""; emptyvalue[4] = ""; emptyvalue[3] = ""; emptyvalue[2] = ""; emptyvalue[1] = ""; emptyvalue[0] = "";
+
+value[0] = self.body;
+//out::tostring( element:"typeref", value:value );
+//out::tostring( element:"typeref", value:emptyvalue );',
+	1,
+	'',
+	"aefee7ed-367b-4eff-90c0-103467badc2e",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	'body',
+	'',
+	'',
+	'body',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("7c37fe97-aff1-40c9-8c3e-30cd3fedc5be",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"0635bb40-52c4-4d66-9e54-c8c9d3bcc4c8",
+	'decoration',
+	'',
+	'',
+	'decoration',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_BATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ATTR
+	VALUES ("e98f6bd0-6a43-4054-98dc-6a06b6ce0b1e",
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ID
+	VALUES (1,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO O_ID
+	VALUES (2,
+	"a2615bd3-7cc5-436e-9f87-134ce6363e53");
+INSERT INTO PE_PE
+	VALUES ("a2615bd3-7cc5-436e-9f87-134ce6363e53",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

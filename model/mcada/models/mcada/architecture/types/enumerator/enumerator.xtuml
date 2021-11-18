@@ -1,0 +1,179 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("0a1de148-af61-4857-9716-7bd27b33214d",
+	'enumerator',
+	3759,
+	'enumerator',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("14f881e4-d35b-4298-8c2b-2e1477a9ae39",
+	"0a1de148-af61-4857-9716-7bd27b33214d",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'T::include( file:"package/t.enumerator.ada" );
+select one next_enumerator related by self->enumerator[R3779.''precedes''];
+if ( not_empty next_enumerator )
+  T::include( file:"package/t.comma.ada" );
+  next_enumerator.render();
+end if;
+',
+	1,
+	'',
+	"f986c120-bda3-445a-b2ff-e36ec7c68166",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("f986c120-bda3-445a-b2ff-e36ec7c68166",
+	"0a1de148-af61-4857-9716-7bd27b33214d",
+	'populate',
+	'',
+	"91f920a3-7da8-4357-9b6c-18ef649a6efa",
+	0,
+	'enumeration = param.enumeration;
+create object instance enumerator of enumerator;
+enumerator.name = param.name;
+
+// Get the last enumerator.
+select any sibling related by enumeration->enumerator[R3755];
+last_enumerator = sibling;
+while ( not_empty sibling )
+  last_enumerator = sibling;
+  select one sibling related by sibling->enumerator[R3779.''precedes''];
+  if ( empty sibling )
+    relate enumerator to last_enumerator across R3779.''succeeds'';
+  end if;
+end while;
+
+relate enumerator to enumeration across R3755;
+//unmarkable = unmarkable::populate( name:"enumerator" );
+//relate enumerator to unmarkable across R3788;
+return enumerator;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("6e8efca3-da60-4447-a1f1-510e69adf80b",
+	"f986c120-bda3-445a-b2ff-e36ec7c68166",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("0ee1b8cf-05f5-42d3-b541-28fa0d5b9d73",
+	"f986c120-bda3-445a-b2ff-e36ec7c68166",
+	'enumeration',
+	"10329cb4-41bd-48fb-a552-3adfa2933b5d",
+	0,
+	'',
+	"dbbd6475-d710-47bb-9e21-630449381451",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("10329cb4-41bd-48fb-a552-3adfa2933b5d",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<enumeration>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TPARM
+	VALUES ("dbbd6475-d710-47bb-9e21-630449381451",
+	"f986c120-bda3-445a-b2ff-e36ec7c68166",
+	'expression',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"6e8efca3-da60-4447-a1f1-510e69adf80b",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("91f920a3-7da8-4357-9b6c-18ef649a6efa",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<enumerator>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("b42ec3a6-a829-43f2-ae72-66a897b6d9c6",
+	"0a1de148-af61-4857-9716-7bd27b33214d",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"1482305e-b2ad-489a-8337-bd37dbd422b2",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("1482305e-b2ad-489a-8337-bd37dbd422b2",
+	"0a1de148-af61-4857-9716-7bd27b33214d",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"14f881e4-d35b-4298-8c2b-2e1477a9ae39",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("2f49a7de-32d9-4302-bfce-fc23387e5785",
+	"0a1de148-af61-4857-9716-7bd27b33214d");
+INSERT INTO O_BATTR
+	VALUES ("2f49a7de-32d9-4302-bfce-fc23387e5785",
+	"0a1de148-af61-4857-9716-7bd27b33214d");
+INSERT INTO O_ATTR
+	VALUES ("2f49a7de-32d9-4302-bfce-fc23387e5785",
+	"0a1de148-af61-4857-9716-7bd27b33214d",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"0a1de148-af61-4857-9716-7bd27b33214d");
+INSERT INTO O_ID
+	VALUES (1,
+	"0a1de148-af61-4857-9716-7bd27b33214d");
+INSERT INTO O_ID
+	VALUES (2,
+	"0a1de148-af61-4857-9716-7bd27b33214d");
+INSERT INTO PE_PE
+	VALUES ("0a1de148-af61-4857-9716-7bd27b33214d",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

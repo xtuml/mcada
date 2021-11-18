@@ -1,0 +1,239 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	'domain_types_package',
+	105,
+	'domain_types_package',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("6c331f23-146b-4682-817b-d1d3c35b13a1",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	'populate',
+	'',
+	"d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
+	0,
+	'domain_package = param.domain_package;
+create object instance domain_types_package of domain_types_package;
+domain_types_package.name = param.name + "_Domain_Types";
+relate domain_types_package to domain_package across R6;
+
+// domain types package is in a file
+filename = T::sub( format:"lr", s:domain_types_package.name );
+genfile = genfile::populate( name:filename, extension:"ads" );
+relate domain_types_package to genfile across R200;
+
+return domain_types_package;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("68f9c978-9f29-41d0-9e06-9d15e2a55186",
+	"6c331f23-146b-4682-817b-d1d3c35b13a1",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("0558a5d1-bb8d-412f-a298-e95691c1a662",
+	"6c331f23-146b-4682-817b-d1d3c35b13a1",
+	'domain_package',
+	"73535d6a-209c-42ca-8802-bd03f5981206",
+	0,
+	'',
+	"68f9c978-9f29-41d0-9e06-9d15e2a55186",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("73535d6a-209c-42ca-8802-bd03f5981206",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<domain_package>',
+	'',
+	'',
+	'../classes.xtuml');
+INSERT INTO S_DT_PROXY
+	VALUES ("d40df8ee-5cc1-46da-ae6c-9cbbc7251eec",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<domain_types_package>',
+	'',
+	'',
+	'../classes.xtuml');
+INSERT INTO O_TFR
+	VALUES ("ce9d680c-2115-46d6-ad21-a63a6d0ad3e9",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'mcada::trace( id:111, flavor:"info", message:"Rendering domain types package for " + self.name );
+// TODO - unwind these recursively to avoid forward reference
+
+T::include( file:"package/t.domain_types_package_begin.ada" );
+select many adatypes related by self->adatype[R7]->enumeration[R3751]->adatype[R3751];
+for each adatype in adatypes
+  adatype.render();
+end for;
+select many adatypes related by self->adatype[R7]->constraint[R3751]->adatype[R3751];
+for each adatype in adatypes
+  adatype.render();
+end for;
+select many adatypes related by self->adatype[R7]->structure[R3751]->adatype[R3751];
+for each adatype in adatypes
+  adatype.render();
+end for;
+T::include( file:"package/t.domain_types_package_end.ada" );
+T::emit( file:self.file_path );
+T::clear();
+',
+	1,
+	'',
+	"6c331f23-146b-4682-817b-d1d3c35b13a1",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("2800cae8-9cff-46db-988b-375a21ca570d",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"ce9d680c-2115-46d6-ad21-a63a6d0ad3e9",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("b20449df-a5cf-4eae-b454-c6fbf4d80c26",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many domain_types_packages from instances of domain_types_package;
+for each domain_types_package in domain_types_packages
+  select one domain_package related by domain_types_package->domain_package[R6];
+  if ( empty domain_package )
+    mcada::trace( flavor:"failure", id:5, message:"domain_types_packages exists without domain_package" );
+    valid = false;
+  end if;
+end for;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"2800cae8-9cff-46db-988b-375a21ca570d",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("db4d473d-4377-468a-8b41-6c2b56403492",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e");
+INSERT INTO O_BATTR
+	VALUES ("db4d473d-4377-468a-8b41-6c2b56403492",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e");
+INSERT INTO O_ATTR
+	VALUES ("db4d473d-4377-468a-8b41-6c2b56403492",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_REF
+	VALUES ("29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"bbe2ea33-8e47-40ca-8e72-549ed79c6914",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	"2f941d37-fd67-4cd3-b194-c47319d6da71",
+	"451dcb7e-9b5d-4ac3-b497-28ba48d95fb1",
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'genfile',
+	'file_path',
+	'R200');
+INSERT INTO R_RGO_PROXY
+	VALUES ("29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"bbe2ea33-8e47-40ca-8e72-549ed79c6914",
+	'../../file/file.xtuml');
+INSERT INTO O_RTIDA_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	0,
+	"8cebbeea-36b8-4776-8c9b-c218273aa306",
+	"a1d656ed-0850-4bfc-a732-3236e0e07810",
+	'../../file/file.xtuml');
+INSERT INTO O_RATTR
+	VALUES ("2f941d37-fd67-4cd3-b194-c47319d6da71",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	"4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	1,
+	'file_path');
+INSERT INTO O_BATTR_PROXY
+	VALUES ("4f236406-a6c2-420d-98a9-e76401875253",
+	"96310937-5d19-4102-a55d-f59311314289",
+	'../../file/genfile/genfile.xtuml');
+INSERT INTO O_ATTR
+	VALUES ("2f941d37-fd67-4cd3-b194-c47319d6da71",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	"db4d473d-4377-468a-8b41-6c2b56403492",
+	'file_path',
+	'',
+	'',
+	'file_path',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e");
+INSERT INTO O_OIDA
+	VALUES ("db4d473d-4377-468a-8b41-6c2b56403492",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	0,
+	'name');
+INSERT INTO O_ID
+	VALUES (1,
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e");
+INSERT INTO O_OIDA
+	VALUES ("2f941d37-fd67-4cd3-b194-c47319d6da71",
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	1,
+	'file_path');
+INSERT INTO O_ID
+	VALUES (2,
+	"29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e");
+INSERT INTO PE_PE
+	VALUES ("29cc464d-fc96-48dc-9ff8-49e2ab8f6c7e",
+	1,
+	"48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("48465f83-2d32-45f2-8556-0a120b87e6c5",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'classes',
+	'',
+	0,
+	'../classes.xtuml');

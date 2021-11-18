@@ -1,0 +1,200 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("b7d603d8-b786-4ec8-bc52-f020cca28388",
+	'member',
+	3758,
+	'member',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("a277271b-8593-4e70-bc1c-4606963430a3",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'T::include( file:"package/t.member_begin.ada" );
+select one typeref related by self->typeref[R3753];
+typeref.render();
+T::include( file:"package/t.member_end.ada" );
+select one next_member related by self->member[R3778.''precedes''];
+if ( not_empty next_member )
+  next_member.render();
+end if;',
+	1,
+	'',
+	"a17cce82-484d-410b-a325-12d9489381b1",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("a17cce82-484d-410b-a325-12d9489381b1",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	'populate',
+	'',
+	"e25f2ff9-5845-47c3-881e-42fec92027f3",
+	0,
+	'structure = param.structure;
+create object instance member of member;
+member.name = param.name;
+
+// Get the last member.
+select any sibling related by structure->member[R3752];
+last_member = sibling;
+while ( not_empty sibling )
+  last_member = sibling;
+  select one sibling related by sibling->member[R3778.''precedes''];
+  if ( empty sibling )
+    relate member to last_member across R3778.''succeeds'';
+  end if;
+end while;
+
+relate member to structure across R3752;
+//markable = markable::populate( name:"member" );
+//relate member to markable across R3783;
+return member;
+
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("6c32eb62-f5c2-43e7-889d-1d2960c5891b",
+	"a17cce82-484d-410b-a325-12d9489381b1",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("1a8da3e2-6b72-4263-8669-fe26704276fc",
+	"a17cce82-484d-410b-a325-12d9489381b1",
+	'expression',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"6c32eb62-f5c2-43e7-889d-1d2960c5891b",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("9015eebb-e742-4ccf-87a1-8b9cdc54ded0",
+	"a17cce82-484d-410b-a325-12d9489381b1",
+	'structure',
+	"be393d64-5c76-4b9f-81f3-4eba1a090921",
+	0,
+	'',
+	"1a8da3e2-6b72-4263-8669-fe26704276fc",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("be393d64-5c76-4b9f-81f3-4eba1a090921",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<structure>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO S_DT_PROXY
+	VALUES ("e25f2ff9-5845-47c3-881e-42fec92027f3",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<member>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("277003f8-ea00-4698-9d7d-9aa0cd1d3755",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	1,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"0adc51ac-af2a-4e22-939c-e3ee8a625c58",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("0adc51ac-af2a-4e22-939c-e3ee8a625c58",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"a277271b-8593-4e70-bc1c-4606963430a3",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("138a515b-df3e-4acb-b8f6-f8d2ff13c665",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_BATTR
+	VALUES ("138a515b-df3e-4acb-b8f6-f8d2ff13c665",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_ATTR
+	VALUES ("138a515b-df3e-4acb-b8f6-f8d2ff13c665",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("92a8e764-d1c6-4a02-96e4-7bbf5d4bab2d",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_BATTR
+	VALUES ("92a8e764-d1c6-4a02-96e4-7bbf5d4bab2d",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_ATTR
+	VALUES ("92a8e764-d1c6-4a02-96e4-7bbf5d4bab2d",
+	"b7d603d8-b786-4ec8-bc52-f020cca28388",
+	"138a515b-df3e-4acb-b8f6-f8d2ff13c665",
+	'defaultvalue',
+	'',
+	'',
+	'defaultvalue',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_ID
+	VALUES (1,
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO O_ID
+	VALUES (2,
+	"b7d603d8-b786-4ec8-bc52-f020cca28388");
+INSERT INTO PE_PE
+	VALUES ("b7d603d8-b786-4ec8-bc52-f020cca28388",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

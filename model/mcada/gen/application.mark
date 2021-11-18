@@ -53,4 +53,4 @@ ooaofooa::Value::Value::Text,NonPersistent,Attribute,true
 ooaofooa::Instance::Component Instance::EQE_Lock,NonPersistent,Attribute,load_only
 ooaofooa::Instance::Component Instance::SQE_Lock,NonPersistent,Attribute,load_only
 ooaofooa::Instance::Component Instance::RealizedBy,NonPersistent,Attribute,load_only
-ooaofooa::Instance::Timer::expiration,NonPersistent,Attribute,load_only
+ooaofooa::Instance::Timer,NonPersistent,Model Class,true

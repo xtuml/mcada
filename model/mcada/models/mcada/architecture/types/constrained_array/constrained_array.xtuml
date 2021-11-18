@@ -1,0 +1,149 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	'constrained_array',
+	3773,
+	'constrained_array',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("4b9a16d4-d03f-41d1-adab-4a52ae761169",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'T::include( file:"package/t.object_begin.ada" );
+T::include( file:"package/t.object_end.ada" );
+',
+	1,
+	'',
+	"0eb19136-8ed5-4a2b-b07b-44e7b6e4fb35",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("0eb19136-8ed5-4a2b-b07b-44e7b6e4fb35",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	'populate',
+	'',
+	"7363f8a6-17a4-42b6-831b-3e9ab8fd639c",
+	0,
+	'domain = param.domain;
+//select any constrained_array related by domain->constrained_array[R3799];
+select any constrained_array from instances of constrained_array; // DELETE THIS LINE
+if ( empty constrained_array )
+  create object instance constrained_array of constrained_array;
+  constrained_array.name = param.name;
+  //relate constrained_array to domain across R3799;
+end if;
+return constrained_array;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("6b0bd269-0154-4987-9c47-91cdee281010",
+	"0eb19136-8ed5-4a2b-b07b-44e7b6e4fb35",
+	'name',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("bf95e9d4-ed6d-4a44-a5f6-b79dbd41bc09",
+	"0eb19136-8ed5-4a2b-b07b-44e7b6e4fb35",
+	'domain',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"6b0bd269-0154-4987-9c47-91cdee281010",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("7363f8a6-17a4-42b6-831b-3e9ab8fd639c",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<constrained_array>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("4edd81b5-13d6-4cf7-9f2c-76cac0f520a1",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"86af9504-1759-4e4a-9e86-6663909ac913",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("86af9504-1759-4e4a-9e86-6663909ac913",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"4b9a16d4-d03f-41d1-adab-4a52ae761169",
+	0,
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("c889a420-905f-46b3-8fa5-0aff5196250b",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd");
+INSERT INTO O_BATTR
+	VALUES ("c889a420-905f-46b3-8fa5-0aff5196250b",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd");
+INSERT INTO O_ATTR
+	VALUES ("c889a420-905f-46b3-8fa5-0aff5196250b",
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd");
+INSERT INTO O_ID
+	VALUES (1,
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd");
+INSERT INTO O_ID
+	VALUES (2,
+	"051a7365-9f1d-44f9-8d6a-a8b3216184bd");
+INSERT INTO PE_PE
+	VALUES ("051a7365-9f1d-44f9-8d6a-a8b3216184bd",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');

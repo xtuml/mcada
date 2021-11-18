@@ -1,0 +1,191 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	'structure',
+	3753,
+	'structure',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("1102538c-d13d-40a2-9455-e6a75e230bf8",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	'render',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one adatype related by self->adatype[R3751];
+T::include( file:"package/t.structure_begin.ada" );
+// Get the first member.
+select any sibling related by self->member[R3752];
+first_member = sibling;
+while ( not_empty sibling )
+  first_member = sibling;
+  select one sibling related by sibling->member[R3778.''succeeds''];
+end while;
+first_member.render(); // member will render siblings
+T::include( file:"package/t.structure_end.ada" );',
+	1,
+	'',
+	"fade36e8-e76b-47ea-a0b0-ab28693b04e7",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("fade36e8-e76b-47ea-a0b0-ab28693b04e7",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	'populate',
+	'',
+	"be393d64-5c76-4b9f-81f3-4eba1a090921",
+	0,
+	'adatype = param.adatype;
+mcada::trace( id:104, flavor:"info", message:"structure::populate " + adatype.name );
+create object instance structure of structure;
+relate structure to adatype across R3751;
+//unmarkable = unmarkable::populate( name:"structure" );
+//relate structure to unmarkable across R3788;
+return structure;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	0);
+INSERT INTO O_TPARM
+	VALUES ("628b14ec-00a4-49b5-852b-e15c00e4b63c",
+	"fade36e8-e76b-47ea-a0b0-ab28693b04e7",
+	'adatype',
+	"ac8b1ea0-0808-4386-9334-3b73a398e95a",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("ac8b1ea0-0808-4386-9334-3b73a398e95a",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<adatype>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO S_DT_PROXY
+	VALUES ("be393d64-5c76-4b9f-81f3-4eba1a090921",
+	"00000000-0000-0000-0000-000000000000",
+	'inst_ref<structure>',
+	'',
+	'',
+	'../types.xtuml');
+INSERT INTO O_TFR
+	VALUES ("92e97f9c-454d-47b2-a4d0-e6b8e8166ff5",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	'validate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'valid = true;
+select many templates from instances of template;
+if ( empty templates )
+  mcada::trace( flavor:"failure", id:5, message:"There are no templates." );
+  valid = false;
+end if;
+
+// Validate siblings and subordinates.
+//return ( valid and structure::validate() );
+return valid;
+',
+	1,
+	'',
+	"0259c771-1085-485b-adce-28927bf0e7b4",
+	0,
+	0);
+INSERT INTO O_TFR
+	VALUES ("0259c771-1085-485b-adce-28927bf0e7b4",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	'tostring',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'value[8] = "";
+value[0] = self.name;
+//out::( element:"template_class", value:value );',
+	1,
+	'',
+	"1102538c-d13d-40a2-9455-e6a75e230bf8",
+	0,
+	0);
+INSERT INTO O_REF
+	VALUES ("74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	0,
+	"f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"8bed6cf1-4bfb-48bb-a416-20a56b19718f",
+	"eb0514b8-8ee5-4571-b880-820a41f8676b",
+	"45c21211-0a77-4118-a8b5-20392934a309",
+	"dfee6876-aba8-4cda-a7e6-a0b1d2ca20f0",
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'adatype',
+	'name',
+	'R3751');
+INSERT INTO R_RGO_PROXY
+	VALUES ("74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"8bed6cf1-4bfb-48bb-a416-20a56b19718f",
+	'../types.xtuml');
+INSERT INTO O_RTIDA_PROXY
+	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	0,
+	"2782cf7d-7077-4e11-ab5a-92eacfe04a40",
+	"eb0514b8-8ee5-4571-b880-820a41f8676b",
+	'../types.xtuml');
+INSERT INTO O_RATTR
+	VALUES ("45c21211-0a77-4118-a8b5-20392934a309",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	"f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	1,
+	'name');
+INSERT INTO O_BATTR_PROXY
+	VALUES ("f5768789-a03f-4fbc-9d4d-51b17077ec05",
+	"ed16f7ea-561a-4a57-9194-4bdf5a22ab8e",
+	'../adatype/adatype.xtuml');
+INSERT INTO O_ATTR
+	VALUES ("45c21211-0a77-4118-a8b5-20392934a309",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	"00000000-0000-0000-0000-000000000000",
+	'name',
+	'',
+	'',
+	'name',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000007",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542");
+INSERT INTO O_OIDA
+	VALUES ("45c21211-0a77-4118-a8b5-20392934a309",
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	0,
+	'name');
+INSERT INTO O_ID
+	VALUES (1,
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542");
+INSERT INTO O_ID
+	VALUES (2,
+	"74380846-e2c0-4c8a-9f7d-63b84d01a542");
+INSERT INTO PE_PE
+	VALUES ("74380846-e2c0-4c8a-9f7d-63b84d01a542",
+	1,
+	"57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("57cd79c2-e0b3-4765-9c9a-decaf34eff84",
+	"00000000-0000-0000-0000-000000000000",
+	"d791089f-e6d6-4e8a-a040-7ffe70c0731b",
+	'types',
+	'',
+	0,
+	'../types.xtuml');
