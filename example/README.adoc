@@ -1,0 +1,5 @@
+= Microwave Oven Example
+
+This is example generation of the Microwave Oven model.
+
+The 'src' folder will likely be removed as the architecture matures.

@@ -70,9 +70,18 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'mcada::trace( id:111, flavor:"info", message:"Rendering domain types package for " + self.name );
+// TODO - unwind these recursively to avoid forward reference
 
 T::include( file:"package/t.domain_types_package_begin.ada" );
-select many adatypes related by self->adatype[R7];
+select many adatypes related by self->adatype[R7]->enumeration[R3751]->adatype[R3751];
+for each adatype in adatypes
+  adatype.render();
+end for;
+select many adatypes related by self->adatype[R7]->constraint[R3751]->adatype[R3751];
+for each adatype in adatypes
+  adatype.render();
+end for;
+select many adatypes related by self->adatype[R7]->structure[R3751]->adatype[R3751];
 for each adatype in adatypes
   adatype.render();
 end for;
