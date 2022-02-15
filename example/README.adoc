@@ -2,4 +2,20 @@
 
 This is example generation of the Microwave Oven model.
 
-The 'src' folder will likely be removed as the architecture matures.
+The 'src' and 'bin' folders likely will be removed as the architecture matures.
+
+Install pyxtuml using pip.
+(python -m pip install pyxtuml)
+
+This script assumes the existence of the 'gnat' Ada compiler.
+
+== Unix
+
+Run the build.sh script with a path to the model project source 'models' folder.
+(e.g. ./build.sh ~/ws/mwo/MicrowaveOven/models)
+
+== Windows
+
+Run the build.bat script with a path to the model project source 'models' folder.
+(e.g. .\build.bat ..\ws\mwo\MicrowaveOven\models)
+
