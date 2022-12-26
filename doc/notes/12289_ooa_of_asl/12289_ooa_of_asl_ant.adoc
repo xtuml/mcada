@@ -18,9 +18,6 @@ of each action and/or reports errors in the syntax.  Additionally, after
 the model is parsed and loaded, queries are run against the populated
 meta-model, and an inventory of the types of statements are enumerated.
 
-.caption text under image
-image::localimage.png[image description alternate text,width=25%]
-
 == 3 Requirements
 
 === 3.1 ASL Lexical Analysis
@@ -42,7 +39,7 @@ image::localimage.png[image description alternate text,width=25%]
 
 . A class diagram shall be employed to semantically capture the results of
   the parsing of bodies of ASL action language.
-. It is desireable that the OOA of ASL Activity be consistent with other
+. It is desirable that the OOA of ASL Activity be consistent with other
   action languages supported by BridgePoint, namely MASL.
 . The statement and expression elements in the OOA of ASL Activity shall
   be related to the structural elements of xtUML (e.g. _class_, _attribute_,
@@ -95,7 +92,7 @@ Therefore, this option was not chosen.
 `antlr` was chosen as the technology, and a strategy was employed to
 perform lexical analysis in a fashion similar to the lexical analysis of
 MASL.  While ASL and MASL are lexically different, the ASL lexer was
-structured to allow comparison and constrast between the two languages.
+structured to allow comparison and contrast between the two languages.
 This has proven useful in the development.
 
 `antlr` supports recursive descent Backus-Naur form grammars and generates
@@ -103,13 +100,16 @@ Java executables for lexical analysis, parsing and abstract syntax tree
 (AST) creation.  It also provides mechanisms for "tree-walking" the
 resultant AST.
 
-The ASL lexer exists as an `anltr` tokeniser in `AslLexer.g`.
+The ASL lexer exists as an `antlr` tokeniser in `AslLexer.g`.
+
+.Fragment of ASL Lexer Source
+image:asl_lexer.png[Fragment of ASL Lexer Source]
 
 === 4.2 ASL Parsing
 
 The choice for parsing strategy followed the same reasoning as that for
 the lexical analysis.  `antlr` is the chosen technology, and a strategy of
-"congruency" with MASL is taken.
+"congruence" with MASL is taken.
 
 By building an ASL parser side-by-side to the MASL parser, the
 similarities and differences of the language could be clearly analysed.
@@ -118,6 +118,9 @@ also a fascinating study in the underlying computer science of two
 distinct Shlaer-Mellor action languages.)
 
 The ASL parser exists as an `anltr` tokeniser in `AslLexer.g`.
+
+.Fragment of ASL Parser Grammar
+image:asl_parser.png[Fragment of ASL Parser Grammar]
 
 === 4.3 OOA of ASL Activity
 
@@ -130,7 +133,7 @@ diagram of the semantics of ASL.  The four options were:
 . OOA of MASL
 
 The choice of building the model from scratch was considered the least
-desireable.  It represents the most work and carries no benefit of
+desirable.  It represents the most work and carries no benefit of
 congruency with an existing OOA of Activity.
 
 An OOA of ASL exists in industry.  The people in possession of this model
@@ -150,7 +153,7 @@ active development.  This model has the following advantages.
   activities for editing, execution and/or translation.  The OOA of OAL
   carries these activities mixed in with the class diagram making it more
   difficult to work with.
-* The OOA of MASL is influencing the future of xtUML both as a langauge
+* The OOA of MASL is influencing the future of xtUML both as a language
   and as tooling (BridgePoint).
 * The MASL action language is a superset of the other existing action
   languages.  And therefore, the OOA of MASL is a superset of any of the
@@ -167,6 +170,16 @@ ASL action bodies.  This was the choice.
 The OOA of ASL is a branch of the OOA of MASL and is will be merged at the
 appropriate time in the project.  It is in the xtuml/mc repository as
 `models/ooamasl` and `models/stratus`.
+
+==== 4.3.1 OOA of (M)ASL Activity
+
+The source model for the OOA of ASL Activity and for the modelled
+activities used to load and populate can be edited with BridgePoint.  Here
+are a few key diagrams for convenience.
+
+* link:masl_subsystems.png[**Model Explorer View of MASL Subsystems**]
+* link:masl_statement.png[**OOA of (M)ASL Statement Subsystem**]
+* link:masl_expression.png[**OOA of (M)ASL Expression Subsystem**]
 
 === 4.4 Populating the OOA
 
@@ -197,13 +210,6 @@ After the parsing and loading of a set of activities is complete, a domain
 function runs with selects (finds) instances of the various statement
 types and simply counts them.  It outputs the tally for each statement
 type enabling consistency checking for testing purposes.
-
-* images
-  ** OOA of MASL subsystems (tree view)
-  ** OOA of MASL statement subsystem
-  ** OOA of MASL expression subsystem
-  ** ASL lexer
-  ** ASL parser
 
 == 5 Work Required
 
@@ -236,38 +242,4 @@ This work is licensed under the Creative Commons CC0 License
 
 ---
 
-
-=== 4.1 ASL Translator
-
-WACA translates the ASL action bodies of functions, state actions, operations
-and bridges with a flex/bison parser (originally lex/yacc) called
-`asl_translator` and `Cat`.
-
-The ASL translator is implemented in C.
-
-The parser populates a model constructed as a C struct with a union of
-members.  These are linked in a "statement tree" with statement nodes.
-
-The abstract syntax tree (AST) is effectively a super/subtype hierarchy.
-
-The asl_translator then walks the tree and prints (with printf statements)
-the Ada statements and expressions.
-
-The statement generation functions could possibly be mapped to operations
-on the classes in the OOA of Ada Statement and Expression.
-
-. Phase II (2022)
-  .. Draft engineering analysis and design documentation for a model of
-     ASL activity (action language).
-  .. Build an OOA of ASL activity.
-  .. Parse ASL and populate model of ASL.
-  .. Extend model of structural Ada to complete classes and associations.
-  .. Build a syntax checker that can be used to check ASL syntax before
-     code generation.
-
-* model compiler components
-  ** structural generation
-  ** target model (implemented as Perl data sets)
-  ** ASL parser
-  ** AST (model of ASL)
 
