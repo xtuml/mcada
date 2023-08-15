@@ -83,13 +83,13 @@
   <repositories>
     <repository>
       <id>io.ciera.repo</id>
-      <url>http://s3.amazonaws.com/xtuml-releases/maven</url>
+      <url>https://s3.amazonaws.com/xtuml-releases/maven</url>
     </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>io.ciera.repo</id>
-      <url>http://s3.amazonaws.com/xtuml-releases/maven</url>
+      <url>https://s3.amazonaws.com/xtuml-releases/maven</url>
     </pluginRepository>
   </pluginRepositories>
 </project>
