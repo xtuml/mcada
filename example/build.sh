@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CIERA_RUNTIME_VERSION=1.1.8
-MCADA_VERSION=0.0.1
+CIERA_RUNTIME_VERSION=2.6.3
+MCADA_VERSION=0.0.1-SNAPSHOT
 
 # check arguments
 if [[ $# < 1 ]]; then
@@ -10,7 +10,7 @@ if [[ $# < 1 ]]; then
   exit 1
 fi
 
-CLASSPATH=~/.m2/repository/io/ciera/io.ciera.runtime/$CIERA_RUNTIME_VERSION/io.ciera.runtime-$CIERA_RUNTIME_VERSION.jar:~/.m2/repository/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.jar:~/.m2/repository/org/xtuml/mcada/$MCADA_VERSION-SNAPSHOT/mcada-$MCADA_VERSION-SNAPSHOT.jar
+CLASSPATH=~/.m2/repository/io/ciera/runtime/$CIERA_RUNTIME_VERSION/runtime-$CIERA_RUNTIME_VERSION.jar:~/.m2/repository/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.jar:~/.m2/repository/org/xtuml/mcada/$MCADA_VERSION/mcada-$MCADA_VERSION.jar
 
 # prepare build space
 mkdir -p gen/code_generation/_ada
