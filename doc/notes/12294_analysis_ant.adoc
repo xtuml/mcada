@@ -1,0 +1,120 @@
+= MC-Ada 2023 Getting Started
+
+xtUML Project Analysis Note
+
+== 1 Abstract
+
+== 2 Introduction and Background
+
+== 3 Requirements
+
+. Get Ada compiler running.
+. Get example 2022 running.
+. Update Getting Started from 2022 if necessary.
+. Document the models and branches.
+. Determine Way Forward with Stratus.
+
+== 4 Analysis
+
+=== 4.1 2022 Example
+
+The 2022 example was fine at the end of 2022, but some things have changed
+to break it. 
+
+* AWS S3 blocks access via http.  This is a security-related enhancement
+  demanding that traffic be encrypted end-to-end.
+* I have migrated to a new Mac and am running (mostly) pure ARM.
+
+The Community Edition of GNAT (Gnu Ada based on gcc) has been updated for
+x86 but not for ARM.  However, the x86 version runs fine using the MacOS
+x86 emulator.
+
+=== 4.2 Models and Branches
+
+==== 4.2.1 MC-Ada
+
+The model of MC-Ada abstracts the Ada implementation of structural xtUML.
+Mappings are supplied for _domain_, _class_, _attribute_, _type_,
+_relationship_ and packaging artifacts (files).  A state machine governs
+the sequencing of translation through 'initializing', 'loading',
+'marking', 'translating', 'rendering' and 'serializing'.
+
+The model of MC-Ada is a traditional model compiler model reading
+instances from a populated 'mcooa' loaded from SQL instanced dumped from
+the application model.
+
+MC-Ada does nothing with activity bodies as of Summer 2023.
+
+MC-Ada is built by Ciera.
+
+==== 4.2.2 Stratus
+
+Stratus is based upon the OOA of MASL.  Structural and activity model data
+is parsed from MASL and populated into the (minorly extended for ASL) OOA
+of MASL.  ASL activities are parsed and loaded.
+
+A set of string-based (non-templated) rendering functions are available
+which translate ASL to MASL.
+
+The branch containing the ASL-to-MASL functionality is found
+<<dr-2,here:12576_asl2masl>>.
+
+There has been discussion on merging this functionality, however there is
+work to do.  Stratus 12576_asl2masl uses a different parser and tree walker
+than Stratus master.  It would be possible for these parsers to co-exist.
+
+=== 4.3 Alternatives
+
+==== 4.3.1 Two-Step Approach (Separate)
+
+MC-Ada could be used to generate structural Ada.  Stratus could be used to
+translate the ASL activity bodies.  These steps could be run separately
+and combined on the output.
+
+==== 4.3.1 Two-Step Approach (Chained)
+
+Ciera supports chaining of model compilers.  Either MC-Ada or Stratus
+could be run first and serialized.  The serialized output would serve as
+input to the second transformation.
+
+==== 4.3.2 Port MC-Ada to OOA of MASL
+
+The transformation activities of MC-Ada are compact and fairly well
+contained.  It does not appear difficult to modify the OAL of these
+transformations to query from a populated OOA of MASL instead of a
+populated OOA of OOA.
+
+== 5 Work Required
+
+=== 5.1 2022 Example
+
+. Download and install GNAT.
+  .. GNAT for ARM lags GNAT for x86.  Download the x86 GNAT and install
+     it.  If necessary, enable it in the security section (by trying to
+     run the installer, failing and then finding it in the security
+     section).
+. Either in your shell or in `build.sh`, add the GNAT bin folder to the
+  PATH (e.g. `~/opt/GNAT/2020/bin`.
+
+=== 5.2 https rather than http
+
+In the `pom.xml` file of the MC-Ada model, change 'http' to 'https' on the
+accesses to the maven repository and plugin repository.
+
+=== 5.3 Port and Combine MC-Ada and Stratus
+
+== 6 Acceptance Test
+
+Run the README from end-to-end, get generated Ada, compiled Ada and a
+binary executable to give output ("Defining oven...").
+
+== 7 Document References
+
+. [[dr-1]] https://support.onefact.net/issues/12294[12294 - Analysis and Documentation]
+. [[dr-2]] https://github.com/cortlandstarrett/mc/tree/12576_asl2masl[cortlandstarrett/mc 12576_asl2masl brach]
+
+---
+
+This work is licensed under the Creative Commons CC0 License
+
+---
